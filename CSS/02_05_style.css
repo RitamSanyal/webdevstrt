@@ -11,6 +11,7 @@ body {
 
 #all {
     background-color: gray;
+    border: 2px solid aqua;
 }
 
 .chowmein {
