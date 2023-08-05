@@ -1,0 +1,21 @@
+.red {
+    background: red;
+    color: blue;
+    border: 1px solid blue;
+}
+
+.blue {
+    background-color: blue;
+    color: red;
+    border: 1px solid red;
+}
+
+* {
+    margin: 1px;
+    padding: 5px;
+}
+
+body {
+    background: rgb(255, 0, 0);
+    background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(158, 32, 172, 1) 50%, rgba(23, 0, 255, 1) 100%);
+}
