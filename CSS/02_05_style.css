@@ -1,6 +1,8 @@
 body {
-    color: wheat;
-    background: lawngreen;
+    /* color: wheat; */
+    /* background: lawngreen; */
+    background: rgb(82, 224, 40);
+    background: linear-gradient(90deg, rgba(82, 224, 40, 1) 0%, rgba(80, 184, 43, 1) 50%, rgba(0, 212, 255, 1) 100%);
 }
 
 #ritam {
