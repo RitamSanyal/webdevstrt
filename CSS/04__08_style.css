@@ -1,5 +1,5 @@
 * {
-    margin: 2px;
+    margin: 0px;
     padding: 5px;
 }
 
@@ -11,4 +11,5 @@
 body {
     background-image: url(/img/media_1fcf02c9210fce7738bab349cfacdb464d227e1c1.png);
     background-repeat: no-repeat;
+    background-size: cover;
 }
