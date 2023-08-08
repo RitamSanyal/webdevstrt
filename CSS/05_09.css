@@ -1,5 +1,10 @@
 .content {
-    height: 23px;
+    height: 423px;
     width: 345px;
     background: red;
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
