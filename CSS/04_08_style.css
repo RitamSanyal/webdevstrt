@@ -4,12 +4,14 @@
 }
 
 .container {
-    background-color: rgb(156, 5, 118);
-    color: white;
+    height: 700px;
+    /* background-color: rgb(156, 5, 118); */
+    color: rgb(78, 1, 49);
 }
 
 body {
     background-image: url(/img/media_1fcf02c9210fce7738bab349cfacdb464d227e1c1.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
