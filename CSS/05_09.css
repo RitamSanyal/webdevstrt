@@ -1,10 +1,25 @@
 .content {
     height: 423px;
     width: 345px;
-    background: red;
+    background: wheat;
+    color: white;
+    margin: 14px 4px;
+    padding: 2px;
+    border: 8px ridge gold;
+}
+
+.content2 {
+    height: 423px;
+    width: 345px;
+    background: black;
+    color: wheat;
+    margin: 14px 4px;
+    padding: 2px;
+    border: 8px ridge gold;
 }
 
 * {
     margin: 0;
     padding: 0;
+    background: black;
 }
