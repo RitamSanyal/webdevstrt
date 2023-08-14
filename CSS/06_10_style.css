@@ -2,6 +2,12 @@ header {
     height: 66px;
     background: black;
     color: gray;
+    text-align: center;
+}
+
+li {
+    display: inline;
+    padding: 10px;
 }
 
 .content {
