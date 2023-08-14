@@ -1,0 +1,20 @@
+header {
+    height: 66px;
+    background: black;
+    color: gray;
+}
+
+.content {
+    background: red;
+    height: 87vh;
+}
+
+footer {
+    background: green;
+    text-align: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}

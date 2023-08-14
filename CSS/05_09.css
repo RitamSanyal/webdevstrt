@@ -3,7 +3,7 @@
     width: 345px;
     background: wheat;
     color: white;
-    margin: 14px 4px;
+    margin: 14px 4px 14px 10px;
     padding: 2px;
     border: 8px ridge gold;
     border-radius: 9px;
@@ -25,7 +25,7 @@
 }
 
 * {
-    margin: 1px;
-    padding: 1px;
+    margin: 0px;
+    padding: 0px;
     background: black;
 }
