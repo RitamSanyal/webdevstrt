@@ -1,0 +1,1 @@
+alert("Welcome to first js script of webdev starting")
