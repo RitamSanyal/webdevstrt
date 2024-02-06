@@ -6,8 +6,36 @@
     <title>Forms</title>
 </head>
 <body>
+    <h1>Form to apply for my startup</h1>
     <form action="post">
-        <input type="text" name="username" placeholder="Enter your username">
+        <div>
+            <label for="username">Enter your Username - </label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+        </div>
+        <div>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="others" value="others">
+            <label for="others">Others</label>
+        </div>
+        <div>
+            <input type="checkbox" name="subscribe" id="subscribe" value="yes">
+            <label for="subscribe">Subscribe to Newsletter and Email</label>
+        </div>
+        <div>
+            <label for="comment">Enter your comment</label>
+            <br>
+            <textarea name="comment" id="comment" cols="50" rows="4"></textarea>
+        </div>
+        <div>
+            <select name="fruit" id="">
+                <option value="apple">Apple</option>
+                <option value="banana">Banana</option>
+                <option value="cherry">Cherry</option>
+            </select>
+        </div>
     </form>
 </body>
 </html>
