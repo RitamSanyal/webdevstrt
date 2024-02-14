@@ -1,17 +1,32 @@
 *{
-    background-color: grey;
+    background-color: rgb(130, 216, 238);
     margin: 0;
     padding: 0;
 }
 .cardbox{
     margin: auto;
     padding: 10px;
-    border: 5px groove purple;
+    border: 5px groove rgb(76, 181, 230);
     border-radius: 5px;
     position: relative;
     top: 15vh;
     /* bottom: 50vh; */
     height:60vh;
     width: 95vw;
-    background-color: #fff;
+    background-color: #28a4dd;
+}
+.pic{
+
+    display: inline-block;
+    position: relative;
+    top: 92px;
+    height: 109px;
+    border-radius: 15px;
+    margin: 0;
+    padding: 0;
+}
+img{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 15px;
 }
