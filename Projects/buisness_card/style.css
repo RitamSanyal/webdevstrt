@@ -1,0 +1,12 @@
+*{
+    background-color: black;
+}
+.cardbox{
+    margin: auto;
+    position: relative;
+    top: 40vh;
+    /* bottom: 50vh; */
+    height:auto;
+    width: 97vw;
+    background-color: #fff;
+}
