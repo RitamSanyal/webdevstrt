@@ -6,7 +6,7 @@
 .cardbox{
     margin: auto;
     padding: 10px;
-    border: 5px groove rgb(76, 181, 230);
+    border: 5px groove rgb(6, 122, 175);
     border-radius: 5px;
     position: relative;
     top: 15vh;
@@ -29,4 +29,13 @@ img{
     height: 30vh;
     width: 30vh;
     border-radius: 15px;
+}
+.name{
+    display: inline-block;
+    position: relative;
+    bottom: 25vh;
+    left: 4vw;
+}
+.nameclr{
+    background-color: #28a4dd;
 }
