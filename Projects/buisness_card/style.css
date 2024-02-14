@@ -33,7 +33,7 @@ img{
 .name{
     display: inline-block;
     position: relative;
-    bottom: 21vh;
+    bottom: 18vh;
     left: 12vw;
     background-color: #28a4dd;
 }
@@ -44,6 +44,9 @@ img{
     background-color: #28a4dd;
     position: relative;
     left: 13%;
+}
+.clr{
+    background-color: #28a4dd;
 }
 .contents{
     background-color: #28a4dd;
@@ -67,4 +70,18 @@ i{
 a{
     color: #000;
     background-color: #28a4dd;
+}
+.links{
+    display: inline-block;
+    position: relative;
+    bottom: 3vh;
+    background-color: #28a4dd;
+}
+.fa-github{
+    position: relative;
+    left: 5vw;
+}
+.fa-linkedin{
+    position: relative;
+    left: 15vw;
 }
