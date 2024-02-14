@@ -13,7 +13,11 @@
     /* bottom: 50vh; */
     height:60vh;
     width: 65vw;
-    background-color: #28a4dd;
+    /* background-color: #28a4dd; */
+    background-image: url(/img/HD-wallpaper-beach-minimalist-digital-art-thumbnail.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .pic{
 
@@ -35,29 +39,29 @@ img{
     position: relative;
     bottom: 18vh;
     left: 12vw;
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 .nameclr{
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 .defclr{
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
     position: relative;
     left: 13%;
 }
 .clr{
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 .contents{
-    background-color: #28a4dd;
+    background-color: #28a4dd05;
 }
 ul{
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
     display: inline-block;
 }
 li{
     list-style: none;
-    background-color: #28a4dd;
+    background-color: #28a4dd04;
     position: relative;
     bottom: 17vh;
     left: 20vw;
@@ -65,17 +69,17 @@ li{
     /* display: inline-block; */
 }
 i{
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 a{
     color: #000;
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 .links{
     display: inline-block;
     position: relative;
     bottom: 3vh;
-    background-color: #28a4dd;
+    background-color: #28a4dd00;
 }
 .fa-github{
     position: relative;
