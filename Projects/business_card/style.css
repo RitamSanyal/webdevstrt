@@ -14,7 +14,7 @@
     height:60vh;
     width: 65vw;
     /* background-color: #28a4dd; */
-    background-image: url(/img/HD-wallpaper-beach-minimalist-digital-art-thumbnail.jpg);
+    background-image: url(/img/vector-DEC-2020-25_generated.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -47,7 +47,7 @@ img{
 .defclr{
     background-color: #28a4dd00;
     position: relative;
-    left: 13%;
+    left: 10px;
 }
 .clr{
     background-color: #28a4dd00;
