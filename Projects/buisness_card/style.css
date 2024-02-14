@@ -7,12 +7,12 @@
     margin: auto;
     padding: 10px;
     border: 5px groove rgb(6, 122, 175);
-    border-radius: 5px;
+    border-radius: 15px;
     position: relative;
     top: 15vh;
     /* bottom: 50vh; */
     height:60vh;
-    width: 95vw;
+    width: 65vw;
     background-color: #28a4dd;
 }
 .pic{
@@ -33,9 +33,38 @@ img{
 .name{
     display: inline-block;
     position: relative;
-    bottom: 25vh;
-    left: 4vw;
+    bottom: 21vh;
+    left: 12vw;
+    background-color: #28a4dd;
 }
 .nameclr{
+    background-color: #28a4dd;
+}
+.defclr{
+    background-color: #28a4dd;
+    position: relative;
+    left: 13%;
+}
+.contents{
+    background-color: #28a4dd;
+}
+ul{
+    background-color: #28a4dd;
+    display: inline-block;
+}
+li{
+    list-style: none;
+    background-color: #28a4dd;
+    position: relative;
+    bottom: 17vh;
+    left: 20vw;
+    padding: 20px;
+    /* display: inline-block; */
+}
+i{
+    background-color: #28a4dd;
+}
+a{
+    color: #000;
     background-color: #28a4dd;
 }
