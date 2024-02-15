@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/282ba1af75.js" crossorigin="anonymous"></script>
+    <title>Buisness Card</title>
+    <style>
+        body{
+            background-color: rgb(28, 125, 236);
+        }
+        .card{
+            position: relative;
+            top: 100px;
+            left: 350px;
+            background-image: url(vector-DEC-2020-25_generated.jpg);
+            background-size: cover;
+            /* background-color: rgb(84, 84, 212); */
+            width: 650px;
+            height: 355px;
+            border: 5px groove blue;
+            border-radius: 7px;
+        }
+        .image{
+            padding: 5px;
+        }
+        .image img{
+            position: relative;
+            left: px;
+            border-radius: 7px;
+        }
+        ul{
+            display: inline-block;
+            margin: 15px 5px;
+            padding: 5px;
+        }
+        ul li{
+            list-style: none;
+        }
+        .links i{
+            color: black;
+        }
+        .links .fa-github{
+            padding: 10px;
+        }
+        .links .fa-linkedin{
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="card">
+        <div class="image">
+            <img width="150px" src="1677531476990.jpeg" alt="">
+        </div>
+        <div class="content">
+            <ul>
+                <li>
+                    <i class="fa-solid fa-phone"> : 8697869676</i>
+                </li>
+                <br>
+                <li>
+                    <i class="fa-solid fa-envelope"> : ritamsanyal23@zohomail.in</i>
+                </li>
+                <br>
+                <li>
+                    <i class="fa-solid fa-location-dot"> : Kolkata,West Bengal,India</i>
+                </li>
+            </ul>
+        </div>
+        <div class="links">
+            <span>
+                <a href="https://github.com/RitamSanyal">
+                    <i class="fa-brands fa-github"> : github.com/RitamSanyal</i>
+                </a>
+            </span>
+            &ThickSpace;
+            <span>
+                <a href="https://www.linkedin.com/in/ritamsanyal/">
+                    <i class="fa-brands fa-linkedin"> : linkedin.com/in/ritamsanyal</i>
+                </a>
+            </span>
+        </div>
+    </div>
 </body>
 </html>
