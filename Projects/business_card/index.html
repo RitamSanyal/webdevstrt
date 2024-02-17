@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/282ba1af75.js" crossorigin="anonymous"></script>
     <title>Buisness Card</title>
     <style>
-        body{
+        body {
             background-color: rgb(28, 125, 236);
         }
-        .card{
+
+        .card {
             position: relative;
             top: 100px;
             left: 350px;
@@ -21,42 +23,67 @@
             border: 5px groove blue;
             border-radius: 7px;
         }
-        .image{
+
+        .image {
             padding: 5px;
         }
-        .image img{
+
+        .image img {
             position: relative;
             left: px;
             border-radius: 7px;
         }
-        ul{
+
+        ul {
             display: inline-block;
             margin: 15px 5px;
             padding: 5px;
         }
-        ul li{
+
+        ul li {
             list-style: none;
         }
-        .content i{
+
+        .content i {
             color: black;
         }
-        .content a i:hover{
+
+        .content a i:hover {
             color: gray;
         }
-        .links i{
+
+        .links i {
             color: black;
         }
-        .links i:hover{
+
+        .links i:hover {
             color: gray;
         }
-        .links .fa-github{
+
+        .links .fa-github {
             padding: 10px;
         }
-        .links .fa-linkedin{
+
+        .links .fa-linkedin {
             padding: 10px;
         }
+
+        @media (max-width: 450px) {
+            .card {
+                transform: rotate(90deg);
+                /* Rotate the card itself */
+                width: 400px;
+                /* Remove fixed width, as card will be rotated */
+                height: 393px;
+                /* Remove fixed height, as card will be rotated */
+                top: 0;
+                /* Reset top position for responsive placement */
+                left: 0;
+                /* Reset left position for responsive placement */
+            }
     </style>
 </head>
+
 <body>
     <div class="card">
         <div class="image">
@@ -96,4 +123,5 @@
         </div>
     </div>
 </body>
+
 </html>
