@@ -1,0 +1,5 @@
+{
+    "inference.model": "custom",
+    "inference.custom.format": "codellama",
+    "inference.custom.model": "codellama:7b"
+}
