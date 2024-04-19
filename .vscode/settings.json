@@ -1,5 +1,7 @@
 {
     "inference.model": "custom",
     "inference.custom.format": "codellama",
-    "inference.custom.model": "codellama:7b"
+    "inference.custom.model": "codellama:7b",
+    "inference.delay": 0,
+    "inference.temperature": 0.5
 }
