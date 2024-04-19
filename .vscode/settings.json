@@ -1,7 +1,7 @@
 {
     "inference.model": "custom",
     "inference.custom.format": "codellama",
-    "inference.custom.model": "codellama:7b",
+    "inference.custom.model": "codellama:7b-code",
     "inference.delay": 0,
     "inference.temperature": 0.5,
     "gitlens.ai.experimental.generateCommitMessage.enabled": false
