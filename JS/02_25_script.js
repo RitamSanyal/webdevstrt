@@ -22,3 +22,7 @@ let o = {
     job : "web dev intern",
 }
 console.log(o)
+o.sallery = "10LPA"
+console.log(o)
+o.sallery = "20LPA"
+console.log(o)
