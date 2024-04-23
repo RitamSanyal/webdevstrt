@@ -14,3 +14,11 @@ let q = undefined;
 let r = null;
 console.log(x, y, z, c, q, r);
 console.log(typeof x, typeof y, typeof z, typeof p , typeof q, typeof r);
+let o = {
+    name : "Ritam Sanyal",
+    age : 22,
+    gender : "male",
+    "date of birth" : "08/02/2002",
+    job : "web dev intern",
+}
+console.log(o)
