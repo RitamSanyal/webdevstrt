@@ -38,6 +38,15 @@
             margin: 0 23px;
         }
 
+        nav ul li a {
+            text-decoration: none;
+            color: antiquewhite;
+        }
+
+        nav ul li a:hover {
+            color: rgb(83, 83, 182);
+        }
+
         .left {
             font-size: 2rem;
             position: relative;
@@ -70,6 +79,10 @@
         .purple {
             color: rgb(156, 82, 226);
         }
+
+        #element{
+            color: rgb(156, 82, 226);
+        }
     </style>
 </head>
 
@@ -79,11 +92,11 @@
             <div class="left">Ritam's Portfolio</div>
             <div class="right">
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Education & Certificates </li>
-                    <li>Projects</li>
-                    <li>Contact Me</li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/">Education & Certificates</a></li>
+                    <li><a href="/">Projects</a></li>
+                    <li><a href="/">Contact Me</a></li>
                 </ul>
             </div>
         </nav>
@@ -92,13 +105,21 @@
         <section class="firstSection">
             <div class="leftSection">
                 Hi,My name is <span class="purple">Ritam Sanyal</span>
-                <div>and I am a Web Developer</div>
+                <div>and I am a</div>
+                <span id="element"></span>
             </div>
             <div class="rightSection">
                 <img src="/web.png" alt="">
             </div>
         </section>
     </main>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Web Developer', 'Problem Solver', 'Fast Learner'],
+            typeSpeed: 50,
+        });
+    </script>
 </body>
 
 </html>
