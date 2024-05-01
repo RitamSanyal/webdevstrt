@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritam Sanyal Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(12, 12, 68);
+            color: antiquewhite;
+            font-family: 'Merienda', sans-serif;
+        }
+
+        nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+            background-color: rgb(18, 18, 90);
+        }
+
+        nav ul{
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li{
+            list-style: none;
+            margin: 0 23px;
+        }
+
+        .left{
+            font-size: 2rem;
+            position: relative;
+            right: 80px;
+        }
+
+        .firstSection{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 80px 0px;
+        }
+
+        .firstSection > div{
+            width: 30%;
+        }
+
+        .leftSection{
+            font-size: 2.5rem;
+        }
+
+        .leftSection div{
+            display: inline;
+        }
+
+        .rightSection img{
+            width: 80%;
+        }
+
+        .purple{
+            color: rgb(156, 82, 226);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">Ritam's Portfolio</div>
+            <div class="right">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Education & Certificates </li>
+                    <li>Projects</li>
+                    <li>Contact Me</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="firstSection">
+            <div class="leftSection">
+                Hi,My name is <span class="purple">Ritam Sanyal</span>
+                <div>and I am a Web Developer</div>
+            </div>
+            <div class="rightSection">
+                <img src="/web.png" alt="">
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
