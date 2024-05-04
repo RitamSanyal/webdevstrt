@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <a href="#home" class="logo">Ritam <span>Sanyal</span></a>
@@ -22,5 +24,40 @@
             <a href="#contact">Contact</a>
         </nav>
     </header>
+    <section class="home" id="home">
+        <div class="home-content">
+            <div class="intro">
+                Hi,My name is <span class="purple">Ritam Sanyal</span><br>
+                <div style="display: inline;">and I am a</div>
+                <span id="element"></span>
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum vero hic veritatis nesciunt veniam
+                architecto dolores inventore nobis ea quo, et, laudantium quas magnam totam aspernatur fuga ducimus
+                exercitationem culpa.
+            </p>
+            <div class="social-icons">
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn">Hire</a>
+                <a href="#contact" class="btn">Contact</a>
+            </div>
+        </div>
+        <div class="home-img">
+            <img src="/ritam.jpeg" alt="">
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Web Developer', 'Problem Solver', 'Fast Learner'],
+            typeSpeed: 50,
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
