@@ -267,7 +267,7 @@ span {
 .timeline-date {
     font-size: 20px;
     font-weight: 800;
-    color: white;
+    color: antiquewhite;
     margin: 6px 0 15px;
 }
 
@@ -288,13 +288,13 @@ span {
 
 .timeline-content h3 {
     font-size: 20px;
-    color: white;
+    color: antiquewhite;
     margin: 0 0 10px;
     font-weight: 500;
 }
 
 .timeline-content p {
-    color: white;
+    color: antiquewhite;
     font-size: 16px;
     font-weight: 300;
     line-height: 22px;
@@ -328,7 +328,7 @@ span {
 
 .contact h2 {
     margin-bottom: 3rem;
-    color: white;
+    color: antiquewhite;
 }
 
 .contact form {
@@ -408,7 +408,7 @@ span {
 }
 
 .footer ul li a {
-    color: white;
+    color: antiquewhite;
     border-bottom: 3px solid transparent;
     transition: 0.3s ease-in-out;
 }
@@ -426,7 +426,7 @@ span {
     margin-top: 50px;
     text-align: center;
     font-size: 16px;
-    color: white;
+    color: antiquewhite;
 }
 
 @media(max-width:1285px) {
@@ -498,7 +498,7 @@ span {
         display: block;
         font-size: 2rem;
         margin: 3rem 0;
-        color: white;
+        color: antiquewhite;
     }
 
     .home {
