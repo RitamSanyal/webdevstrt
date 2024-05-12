@@ -560,35 +560,47 @@ span {
         margin-bottom: 3rem;
         font-size: 4rem;
     }
+
+    .certification h2 {
+        margin-bottom: 3rem;
+        font-size: 4.5rem;
+    }
 }
-.certification{}
-.slide-container{
+
+.certification {}
+
+.slide-container {
     max-width: 1120px;
     width: 100%;
     background-color: var(--bg-color);
     padding: 40px 0;
 }
-.slide-content{
+
+.slide-content {
     margin: 0 40px;
 }
-.card{
+
+.card {
     /* width: 320px; */
     border-radius: 35px;
     background-color: var(--second-bg-color);
 }
+
 .image-content,
-.card-content{
+.card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px 14px;
 }
-.image-content{
+
+.image-content {
     position: relative;
     row-gap: 5px;
     padding: 25px 0;
 }
-.overlay{
+
+.overlay {
     position: absolute;
     left: 0;
     top: 0;
@@ -597,44 +609,51 @@ span {
     background-color: var(--text-color);
     border-radius: 25px 25px 0 25px;
 }
+
 .overlay::before,
-.overlay::after{
+.overlay::after {
     content: '';
     position: absolute;
     right: 0;
     bottom: -40px;
     height: 40px;
     width: 40px;
-    background-color: var(--text-color) ;
+    background-color: var(--text-color);
 }
-.overlay::after{
+
+.overlay::after {
     border-radius: 0 25px 0 0;
     background-color: #0b0541;
 }
-.card-image{
+
+.card-image {
     position: relative;
     height: 150px;
     width: 150px;
     background-color: var(--bg-color);
     padding: 3px;
 }
-.card-image .card-img{
+
+.card-image .card-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border: 4px solid var(--text-color);
 }
-.name{
+
+.name {
     font-size: 18px;
     font-weight: 500;
     color: antiquewhite;
 }
-.description{
+
+.description {
     font-size: 14px;
     color: antiquewhite;
     text-align: center;
 }
-.button{
+
+.button {
     border: none;
     font-size: 16px;
     color: antiquewhite;
@@ -645,10 +664,12 @@ span {
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 }
-.button:hover{
+
+.button:hover {
     background-color: var(--text-color);
     color: var(--main-color);
 }
+
 .autoplay-progress {
     position: absolute;
     right: 16px;
