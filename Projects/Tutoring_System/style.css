@@ -26,6 +26,14 @@ main {
     text-align: center;
 }
 
+.navbar-toggler{
+    background: #f4f4f4;
+}
+
+.navbar-toggler-icon{
+    background: #f4f4f4;
+}
+
 .welcome-section,
 .courses-section,
 .course-detail-section,
