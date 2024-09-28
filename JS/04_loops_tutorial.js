@@ -2,7 +2,7 @@ console.log("Looping Tutorial")
 
 let a = 1;
 for (let i = 0; i < 100; i++) {
-    console.log(a+i);
+    console.log(a + i);
 }
 
 let obj = {
@@ -15,8 +15,8 @@ let obj = {
 
 for (const key in obj) {
     // if (Object.hasOwnProperty.call(obj, key)) {
-        const element = obj[key];
-        console.log(key,element)
+    const element = obj[key];
+    console.log(key, element)
     // }
 }
 
@@ -25,7 +25,7 @@ for (const c of "Ritam Sanyal") {
 }
 
 let i = 0;
-while (i<=6) {
+while (i <= 6) {
     console.log(i);
     i++;
 }
