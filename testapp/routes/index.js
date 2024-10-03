@@ -16,7 +16,8 @@ router.get("/create", async function (req, res) {
 });
 
 router.get("/allusers", async function (req, res) {
-  let allusers = await userModel.findOne({ username: "Ritam007" });
+  // let allusers = await userModel.findOne({ username: "Ritam007" });
+  let allusers = await userModel.find();
   res.send(allusers);
 });
 

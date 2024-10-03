@@ -1,6 +1,6 @@
 var express = require('express');
 const mongoose = require('mongoose');
-var router = express.Router();
+// var router = express.Router();
 
 mongoose.connect("mongodb://127.0.0.1:27017/test")
 
