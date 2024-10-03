@@ -16,6 +16,13 @@ router.get("/checkban", function (req, res) {
   }
 });
 
+router.get("/removeban", function (req, res) {
+  req.session.destroy(function (err) {
+    if (err) throw err;
+    res.send("Ban Removed");
+  })
+})
+
 router.get("/create", async function (req, res) {
   const createduser = await userModel.create({
     username: "Ritam007",
