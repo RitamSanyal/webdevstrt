@@ -3,8 +3,19 @@ var router = express.Router();
 const userModel = require('./users')
 
 router.get("/", function (req, res) {
+  res.cookie("age",22);
   req.session.banned = true;
   res.render("index")
+});
+
+router.get("/readcookie", function (req, res) {
+  console.log(req.cookies.age);
+  res.send("Check Cookie Details in console");
+});
+
+router.get("/deletecookie", function (req, res) {
+  res.clearCookie("age");
+  res.send("Cookie Cleared")
 });
 
 router.get("/checkban", function (req, res) {
