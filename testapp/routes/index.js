@@ -7,9 +7,14 @@ router.get("/", function (req, res) {
   res.render("index")
 });
 
-router.get("/checkban", function(req,res){
-  console.log(req.session);
-})
+router.get("/checkban", function (req, res) {
+  if (req.session.banned === true) {
+    res.send("You are banned");
+  }
+  else {
+    res.send("You are not banned");
+  }
+});
 
 router.get("/create", async function (req, res) {
   const createduser = await userModel.create({
