@@ -3,6 +3,7 @@ var router = express.Router();
 const userModel = require('./users')
 
 router.get("/", function (req, res) {
+  req.session.banned = true;
   res.render("index")
 });
 
