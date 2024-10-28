@@ -1,10 +1,13 @@
-# Wellcome to webdevstrt Repo 
-### where journey for Fullstack starts
-Starting my webdev journey with this repository
+# Wellcome to `webdevstrt` Repo
 
+##### Where journey for Full-Stack starts
+
+Starting my webdev journey with this repository.
 This repository contains raw HTML, CSS, and JS code that I am using to learn web development.
 
-# Contents
+This repo has no use for you (or may be it it) but I don't know so yeah. Feel free to roam around and learn from my mistakes.
+
+### Contents
 
 - `/HTML` - The main HTML folder for practice.
 - `/CSS` -  The main CSS folder for practice.
