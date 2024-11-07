@@ -4,5 +4,6 @@
     "inference.custom.model": "codellama:7b",
     "inference.delay": 0,
     "inference.temperature": 0.5,
-    "gitlens.ai.experimental.generateCommitMessage.enabled": false
+    "gitlens.ai.experimental.generateCommitMessage.enabled": false,
+    "livePreview.defaultPreviewPath": "/Projects/ITS_Project/views/index copy.ejs"
 }

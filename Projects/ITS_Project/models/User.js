@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
+const plm = require('passport-local-mongoose')
 
 const UserSchema = new mongoose.Schema({
     user_id: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true
     },
@@ -14,5 +19,7 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
+UserSchema.plugin(plm);
 
 module.exports = mongoose.model('User', UserSchema);
