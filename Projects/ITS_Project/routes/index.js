@@ -1,57 +1,106 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../models/User')
 const passport = require('passport');
-const localStrategy = require('passport-local');
-passport.use(new localStrategy(User.authenticate()));
+const User = require('../models/User');
+const StreamSelection = require('../models/StreamSelection'); // Import the StreamSelection model
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { title: 'Express' });
 });
 
-router.post('/select-stream', isLoggedIn ,async (req, res) => {
+router.post('/register', async (req, res) => {
+  const { username, password } = req.body;
   try {
-    const { user_id, stream_choice } = req.body;
-    const newUser = new User({ user_id, stream_choice });
-    await newUser.save();
-    res.status(200).json({ message: 'Stream selection saved successfully' });
+    let user = await User.findOne({ username });
+    if (user) return res.status(400).json({ message: 'Username already exists' });
+
+    user = new User({ username, password });
+    await user.save();
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    console.error(err.message);
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-router.post('/register', function (req, res) {
-  var userdata = new userModel({
-    user_id: req.body.user_id
-  });
-
-  userModel.register(userdata, req.body.password)
-    .then(function (registereduser) {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect('/profile');
-      })
-    })
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  console.log('Session:', req.session); // Debugging session data
+  res.status(200).json({ message: 'Logged in successfully' });
 });
 
-router.post('/login', passport.authenticate("local", {
-  successRedirect: "/profile",
-  failureRedirect: "/"
-}), function (req, res) { });
 
-router.get('/logout', function (req, res, next) {
-  req.logout(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+router.get('/logout', (req, res) => {
+  req.logout(err => {
+    if (err) return res.status(500).json({ error: 'Failed to log out' });
+    res.status(200).json({ message: 'Logged out successfully' });
   });
 });
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
+
+router.post('/select-stream', async (req, res) => {
+  try {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+
+    const userId = req.user._id;
+    const { stream_choice } = req.body;
+
+    // Check if the user already has a stream selection
+    const existingSelection = await StreamSelection.findOne({ user_id: userId });
+
+    if (existingSelection) {
+      return res.status(400).json({
+        error: 'User has already selected a stream',
+        current_selection: existingSelection.stream_choice
+      });
+    }
+
+    // Create a new stream selection if none exists
+    const selection = await StreamSelection.create({
+      user_id: userId,
+      stream_choice: stream_choice
+    });
+
+    res.status(200).json({ message: 'Stream selection saved', selection });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while saving stream selection' });
   }
-  res.redirect('/');
+});
+
+router.put('/update-stream', async (req, res) => {
+  try {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+
+    const userId = req.user._id;
+    const { stream_choice } = req.body;
+
+    // Find the existing selection for the user
+    const existingSelection = await StreamSelection.findOne({ user_id: userId });
+
+    if (!existingSelection) {
+      return res.status(404).json({ error: 'No stream selection found to update' });
+    }
+
+    // Update the stream choice
+    existingSelection.stream_choice = stream_choice;
+    await existingSelection.save();
+
+    res.status(200).json({ message: 'Stream selection updated', selection: existingSelection });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while updating stream selection' });
+  }
+});
+
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.status(401).json({ message: 'Please log in to access this resource' });
 }
+
 
 module.exports = router;
