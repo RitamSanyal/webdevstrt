@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: red;
+    padding: 10px;
+    color: white;
+}
+
+.navbar input {
+    flex: 1;
+    margin: 0 10px;
+    padding: 5px;
+}
+
+.banner {
+    background: url('https://loremflickr.com/800/200/diwali') no-repeat center center/cover;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.categories,
+.products {
+    padding: 10px;
+}
+
+.category-list,
+.product-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.category,
+.product {
+    background: white;
+    padding: 10px;
+    min-width: 150px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.category img,
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 20px;
+}
+
+.nav-item span {
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .navbar input {
+        margin: 0 5px;
+    }
+
+    .banner {
+        font-size: 18px;
+        height: 150px;
+    }
+}
