@@ -1,13 +1,21 @@
-// eslint-disable-next-line react/prop-types
-const UserContext = ({children}) => {
+import { createContext } from "react";
 
-    const username = "Ritam Sanyal"
+export const DataContext = createContext();
+
+const UserContext = ({ children }) => {
+
+    const userData = {
+        name: "John Doe",
+        email: "johndoe@example.com",
+        phone: "1234567890",
+        address: "123 Main St, Anytown, USA"
+    }
 
     return (
-        <div>
-            <h1>User is : {username}.</h1>
+        <DataContext.Provider value={userData}>
             {children}
-        </div>
+        </DataContext.Provider>
     )
-}
-export default UserContext
+};
+
+export default UserContext;
