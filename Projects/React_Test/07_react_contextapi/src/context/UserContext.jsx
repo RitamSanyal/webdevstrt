@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createContext } from "react";
 
 export const DataContext = createContext();
@@ -16,6 +17,11 @@ const UserContext = ({ children }) => {
             {children}
         </DataContext.Provider>
     )
+};
+
+
+UserContext.propTypes = {
+    children: PropTypes.node.isRequired
 };
 
 export default UserContext;
