@@ -1,6 +1,10 @@
+import Login from "./components/Auth/Login"
+
 const App = () => {
   return (
-    <div className="">App</div>
+    <>
+      <Login />
+    </>
   )
 }
 
