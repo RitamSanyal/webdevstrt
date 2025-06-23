@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
-const Login = () => {
+const Login = ({handelLogin}) => {
+
+  // console.log(handelLogin)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('Form submitted');
-    console.log('Email:', email);
-    console.log('Password:', password);
+    handelLogin(email, password);
     setEmail('');
     setPassword('');
     // const email = e.target[0].value;
@@ -44,7 +44,7 @@ const Login = () => {
             required
             className='outline-none border-2 border-emerald-600 text-xl mt-3 py-3 px-5 rounded-full' type="password" placeholder='Enter your password'
           />
-          <button className='mt-5 outline-none border-none bg-emerald-600 text-xl py-3 px-5 rounded-full'>Login</button>
+          <button className='mt-5 outline-none border-none bg-emerald-600 hover:bg-emerald-700 text-xl py-3 px-5 rounded-full'>Login</button>
         </form>
       </div>
     </div>
