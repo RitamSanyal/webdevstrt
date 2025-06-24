@@ -4,6 +4,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/LocalStorage';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+    // localStorage.clear(); // Clear localStorage for testing purposes
 
     const [userData, setuserData] = useState(null)
 
@@ -18,7 +19,7 @@ const AuthProvider = ({ children }) => {
             <AuthContext.Provider value={userData}>
                 {children}
             </AuthContext.Provider>
-        </div>
+        </div>  
     )
 }
 

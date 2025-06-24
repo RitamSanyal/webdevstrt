@@ -11,14 +11,14 @@ const App = () => {
 
   const authData = useContext(AuthContext)
 
-  // useEffect(() => {
-  //   if (authData) {
-  //     const loggedInUser = localStorage.getItem("loggedInUser");
-  //     if(loggedInUser){
-  //       setuser(loggedInUser.role);
-  //     }
-  //   }
-  // }, [authData])
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const userData = JSON.parse(loggedInUser)
+      setuser(userData.role);
+      setLoggedInUserData(userData.data);
+    }
+  },[])
 
 
   const handelLogin = (email, password) => {
@@ -31,7 +31,7 @@ const App = () => {
       if (employee) {
         setuser('employee')
         setLoggedInUserData(employee);
-        localStorage.setItem("loggedInUser", JSON.stringify({ role: 'employee' }));
+        localStorage.setItem("loggedInUser", JSON.stringify({ role: 'employee', data: employee }));
       }
     }
     else {
