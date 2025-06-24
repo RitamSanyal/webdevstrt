@@ -1,8 +1,15 @@
 const employees = [
     {
         ID: "EMP001",
+        name: "John Doe",
         email: "john.doe@example.com",
         password: "123",
+        taskStats: {
+            activeCount: 1,
+            newTaskCount: 1,
+            completedCount: 1,
+            failedCount: 1
+        },
         tasks: [
             {
                 active: true,
@@ -38,8 +45,15 @@ const employees = [
     },
     {
         ID: "EMP002",
+        name: "Jane Smith",
         email: "jane.smith@example.com",
         password: "123",
+        taskStats: {
+            activeCount: 1,
+            newTaskCount: 1,
+            completedCount: 2,
+            failedCount: 1
+        },
         tasks: [
             {
                 active: true,
@@ -85,8 +99,15 @@ const employees = [
     },
     {
         ID: "EMP003",
+        name: "Mike Jordan",
         email: "mike.jordan@example.com",
         password: "123",
+        taskStats: {
+            activeCount: 2,
+            newTaskCount: 1,
+            completedCount: 1,
+            failedCount: 0
+        },
         tasks: [
             {
                 active: true,
@@ -122,8 +143,15 @@ const employees = [
     },
     {
         ID: "EMP004",
+        name: "Lisa Wong",
         email: "lisa.wong@example.com",
         password: "123",
+        taskStats: {
+            activeCount: 1,
+            newTaskCount: 1,
+            completedCount: 2,
+            failedCount: 1
+        },
         tasks: [
             {
                 active: false,
@@ -169,8 +197,15 @@ const employees = [
     },
     {
         ID: "EMP005",
+        name: "Rahul Kumar",
         email: "rahul.kumar@example.com",
         password: "123",
+        taskStats: {
+            activeCount: 1,
+            newTaskCount: 1,
+            completedCount: 2,
+            failedCount: 1
+        },
         tasks: [
             {
                 active: true,
@@ -219,16 +254,17 @@ const employees = [
 const admin = [
     {
         ID: "ADM001",
+        name: "Admin Master",
         email: "admin.master@example.com",
         password: "123"
     }
 ];
 
-
 export const setLocalStorage = () => {
-    localStorage.setItem("employees",JSON.stringify(employees));
-    localStorage.setItem("admin",JSON.stringify(admin));
+    localStorage.setItem("employees", JSON.stringify(employees));
+    localStorage.setItem("admin", JSON.stringify(admin));
 }
+
 export const getLocalStorage = () => {
     const employees = JSON.parse(localStorage.getItem("employees"));
     const admin = JSON.parse(localStorage.getItem("admin"));
