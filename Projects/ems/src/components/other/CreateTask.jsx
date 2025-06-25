@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getLocalStorage } from '../../utils/localStorage'
 
 const CreateTask = () => {
 
@@ -12,21 +13,22 @@ const CreateTask = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // console.log(taskTitle, taskDescription, taskDate, assignTo, category);
         setnewTask({taskTitle, taskDescription, taskDate, assignTo, category,active:false, newTask:true, completed:false, failed:false})
-
+        // console.log(newTask)
         const data = JSON.parse(localStorage.getItem('employees'))
+        // console.log(data)
         data.forEach((elem)=>{
             if(assignTo == elem.name){
                 elem.tasks.push(newTask)
+                console.log(elem.tasks)
             }
         })
 
-        settaskTitle('')
-        settaskDescription('')
-        settaskDate('')
-        setassignTo('')
-        setCategory('')
+        // settaskTitle('')
+        // settaskDescription('')
+        // settaskDate('')
+        // setassignTo('')
+        // setCategory('')
 
     }
 
