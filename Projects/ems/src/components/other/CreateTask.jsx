@@ -24,11 +24,11 @@ const CreateTask = () => {
             }
         })
 
-        // settaskTitle('')
-        // settaskDescription('')
-        // settaskDate('')
-        // setassignTo('')
-        // setCategory('')
+        settaskTitle('')
+        settaskDescription('')
+        settaskDate('')
+        setassignTo('')
+        setCategory('')
 
     }
 
