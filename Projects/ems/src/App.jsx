@@ -13,11 +13,13 @@ const App = () => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
+
     if (loggedInUser) {
       const userData = JSON.parse(loggedInUser)
       setuser(userData.role);
       setLoggedInUserData(userData.data);
     }
+
   },[])
 
 
@@ -42,9 +44,7 @@ const App = () => {
   return (
     <>
       {!user ? <Login handelLogin={handelLogin} /> : ''}
-      {user == 'admin' ? <AdminDashboard /> : (user == 'employee' ? <EmployeeDashboard data={loggedInUserData} /> : null)}
-      {/* <EmployeeDashboard /> */}
-      {/* <AdminDashboard /> */}
+      {user == 'admin' ? <AdminDashboard changeUser={setuser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setuser} data={loggedInUserData} /> : null)}
     </>
   )
 }
