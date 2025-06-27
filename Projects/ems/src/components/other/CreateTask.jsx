@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { getLocalStorage } from '../../utils/localStorage'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const CreateTask = () => {
-
+    const [userData, setuserData] = useContext(AuthContext)
     const [taskTitle, settaskTitle] = useState('')
     const [taskDescription, settaskDescription] = useState('')
     const [taskDate, settaskDate] = useState('')
@@ -13,16 +13,21 @@ const CreateTask = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        setnewTask({taskTitle, taskDescription, taskDate, assignTo, category,active:false, newTask:true, completed:false, failed:false})
-        // console.log(newTask)
-        const data = JSON.parse(localStorage.getItem('employees'))
+        setnewTask({ taskTitle, taskDescription, taskDate, assignTo, category, active: false, newTask: true, completed: false, failed: false })
+
+        const data = userData
         // console.log(data)
-        data.forEach((elem)=>{
-            if(assignTo == elem.name){
+
+        data.forEach((elem) => {
+            if (assignTo == elem.name) {
                 elem.tasks.push(newTask)
-                console.log(elem.tasks)
+                // console.log(elem.tasks)
+                elem.taskStats.newTaskCount = elem.taskStats.newTaskCount + 1
             }
         })
+        setuserData(data)
+        console.log(data)
+        // localStorage.setItem('employees', JSON.stringify(data))
 
         settaskTitle('')
         settaskDescription('')
