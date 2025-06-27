@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 const Login = ({handelLogin}) => {
 
@@ -50,5 +51,8 @@ const Login = ({handelLogin}) => {
     </div>
   )
 }
+Login.propTypes = {
+  handelLogin: PropTypes.func.isRequired,
+};
 
 export default Login

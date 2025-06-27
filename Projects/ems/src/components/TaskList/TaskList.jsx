@@ -1,8 +1,8 @@
-import React from 'react'
 import AcceptTask from './AcceptTask'
 import NewTask from './NewTask'
 import CompletedTask from './CompletedTask'
 import FailedTask from './FailedTask'
+import PropTypes from 'prop-types'
 
 const TaskList = ({ data }) => {
     return (
@@ -24,4 +24,11 @@ const TaskList = ({ data }) => {
         </div>
     )
 }
+
+TaskList.propTypes = {
+    data: PropTypes.shape({
+        tasks: PropTypes.arrayOf(PropTypes.object).isRequired
+    }).isRequired
+}
+
 export default TaskList

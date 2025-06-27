@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types';
 
 const AcceptTask = ({ data }) => {
     // console.log(data.taskTitle)
@@ -19,5 +19,14 @@ const AcceptTask = ({ data }) => {
         </div>
     )
 }
+
+AcceptTask.propTypes = {
+    data: PropTypes.shape({
+        category: PropTypes.string,
+        taskDate: PropTypes.string,
+        taskTitle: PropTypes.string,
+        taskDescription: PropTypes.string,
+    }).isRequired,
+};
 
 export default AcceptTask

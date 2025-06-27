@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types';
 
 const TaskListNumber = ({data}) => {
     return (
@@ -22,5 +22,16 @@ const TaskListNumber = ({data}) => {
         </div>
     )
 }
+
+TaskListNumber.propTypes = {
+    data: PropTypes.shape({
+        taskStats: PropTypes.shape({
+            newTaskCount: PropTypes.number,
+            completedCount: PropTypes.number,
+            activeCount: PropTypes.number,
+            failedCount: PropTypes.number,
+        }).isRequired,
+    }).isRequired,
+};
 
 export default TaskListNumber

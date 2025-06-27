@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '../../context/AuthProvider'
+import { AuthContext } from '../../context/AuthContext'
 
 const CreateTask = () => {
     const [userData, setuserData] = useContext(AuthContext)
@@ -16,18 +16,15 @@ const CreateTask = () => {
         setnewTask({ taskTitle, taskDescription, taskDate, assignTo, category, active: false, newTask: true, completed: false, failed: false })
 
         const data = userData
-        // console.log(data)
 
         data.forEach((elem) => {
             if (assignTo == elem.name) {
                 elem.tasks.push(newTask)
-                // console.log(elem.tasks)
                 elem.taskStats.newTaskCount = elem.taskStats.newTaskCount + 1
             }
         })
         setuserData(data)
         console.log(data)
-        // localStorage.setItem('employees', JSON.stringify(data))
 
         settaskTitle('')
         settaskDescription('')

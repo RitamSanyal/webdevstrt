@@ -1,10 +1,8 @@
 import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthProvider'
+import { AuthContext } from '../../context/AuthContext'
 
 const AllTask = () => {
     const [userData] = useContext(AuthContext)
-    // console.log(userData)
-    // console.log(authData.employees);
 
     return (
         <div className='bg-[#1C1C1C] p-5 rounded mt-5 h-40' id='tasklist'>

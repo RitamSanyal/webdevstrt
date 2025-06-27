@@ -1,18 +1,6 @@
-import React, { useState } from 'react'
-import { setLocalStorage } from '../../utils/localStorage'
+import PropTypes from 'prop-types';
 
 const Header = (props) => {
-
-    // const [userName, setuserName] = useState('')
-
-    // if(!data) {
-    //     setuserName('Ritam Sanyal')
-    // }
-    // else {
-    //     setuserName(data.name)
-    // }
-
-    // console.log(data)
 
     const logout = () => {
         localStorage.setItem("loggedInUser", '');
@@ -26,5 +14,9 @@ const Header = (props) => {
         </div>
     )
 }
+
+Header.propTypes = {
+    changeUser: PropTypes.func.isRequired,
+};
 
 export default Header
