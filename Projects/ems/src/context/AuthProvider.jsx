@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { AuthContext } from './AuthContext';
 
 const AuthProvider = ({ children }) => {
-    // localStorage.clear(); // Clear localStorage for testing purposes
 
     const [userData, setuserData] = useState(null)
 
