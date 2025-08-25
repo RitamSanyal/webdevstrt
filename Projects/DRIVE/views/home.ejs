@@ -11,9 +11,15 @@
 
 <body>
     <main class="p-4 bg-gray-100 dark:bg-gray-800 h-screen w-screen">
-        <button onclick="showPop()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Upload File
-        </button>
+        <div class="flex justify-between items-center">
+            <button onclick="showPop()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Upload File
+            </button>
+            <button onclick="location.href='/logout'"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3">
+                Logout
+            </button>
+        </div>
         <div class="pop hidden backdrop-blur fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class="flex items-center justify-center w-96">
@@ -36,20 +42,36 @@
                         <input id="dropzone-file" type="file" class="hidden" name="file" />
                     </label>
                 </div>
-                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold my-3 py-2 px-4 rounded">Upload File</button>
+                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold my-3 py-2 px-4 rounded">Upload
+                    File</button>
             </form>
             <button class="absolute top-107 right-125 text-gray-500 hover:text-gray-400 text-xl" onclick="hidePop()">
                 <i class="ri-close-line"></i>
             </button>
         </div>
+
+        <div class="files mt-3 flex flex-col gap-2">
+            <% files.forEach(file=> { %>
+                <div class="p-2 cursor-pointer rounded-md bg-gray-300 flex justify-between">
+                    <h1>
+                        <%= file.originalName %>
+                    </h1>
+                    <a class="text-black-800 hover:text-gray-500" href="/download/<%= file.path %>"
+                        download="<%= file.originalName %>" target="_blank">
+                        <i class="ri-file-download-line"></i>
+                    </a>
+                </div>
+                <% }) %>
+        </div>
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
         function showPop() {
-            document.querySelector('.pop').style.display='flex';
+            document.querySelector('.pop').style.display = 'flex';
         }
         function hidePop() {
-            document.querySelector('.pop').style.display='none';
+            document.querySelector('.pop').style.display = 'none';
         }
     </script>
 </body>

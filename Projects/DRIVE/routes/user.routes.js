@@ -34,7 +34,7 @@ router.post('/register',
             password: hashPassword
         });
 
-        res.json(newUser);
+        res.redirect('/user/login');
     })
 
 router.get('/login', (req, res) => {
@@ -79,8 +79,8 @@ router.post('/login',
             email: user.email
         }, process.env.JWT_SECRET);
 
-        res.cookie('token',token);
-        res.send('Logged in successfully');
+        res.cookie('token', token);
+        res.redirect('/home');
 
     });
 
