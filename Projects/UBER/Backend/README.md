@@ -90,3 +90,90 @@ Validation rules are defined in [routes/user.routes.js](routes/user.routes.js).
     "error": "Internal server error"
   }
   ```
+
+## POST /users/login
+
+Authenticate an existing user.
+
+- URL: `/users/login`
+- Method: `POST`
+- Content-Type: `application/json`
+- Implemented in: `routes/user.routes.js` -> handler: [`loginUser`](controllers/user.controller.js)
+
+### Description
+
+Authenticates a user using email and password. Returns a JWT token and the user object if credentials are valid.
+
+### Request body
+
+JSON object with these fields:
+
+- `email` (string) — required, must be a valid email
+- `password` (string) — required, minimum 6 characters
+
+Example:
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+```
+
+### Responses
+
+- 200 OK
+  - Description: User successfully authenticated.
+  - Body: JSON containing `token` (JWT) and `user` (user object).
+  - Example:
+
+  ```json
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+      "_id": "60f7f8b9a2e4d34b8c8b4567",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      "socketId": null,
+      "__v": 0
+    }
+  }
+  ```
+
+- 400 Bad Request
+  - Description: Validation failed.
+  - Body: `{ "errors": [ { "msg": "...", "param": "...", ... } ] }`
+  - Example:
+
+  ```json
+  {
+    "errors": [
+      { "msg": "Please provide a valid email", "param": "email", "location": "body" }
+    ]
+  }
+  ```
+
+- 401 Unauthorized
+  - Description: Invalid email or password.
+  - Body: `{ "message": "Invalid email or password" }`
+  - Example:
+
+  ```json
+  {
+    "message": "Invalid email or password"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error (e.g. database failure, unhandled exception).
+  - Body: `{ "error": "Internal server error" }`
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
