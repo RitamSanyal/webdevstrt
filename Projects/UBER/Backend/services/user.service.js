@@ -11,11 +11,11 @@ module.exports.createUser = async ({
     email,
     password
 }) => {
-    if(!firstname || !email || !password){
+    if (!firstname || !email || !password) {
         throw new Error('Missing required fields');
     }
     const user = userModel.create({
-        fullname:{
+        fullname: {
             firstname,
             lastname
         },
