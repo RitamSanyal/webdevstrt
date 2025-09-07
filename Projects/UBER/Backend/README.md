@@ -177,3 +177,110 @@ Example:
     "error": "Internal server error"
   }
   ```
+
+## GET /users/profile
+
+Get the authenticated user's profile.
+
+- URL: `/users/profile`
+- Method: `GET`
+- Content-Type: `application/json`
+- Requires authentication (JWT in cookie or Authorization header)
+- Implemented in: `routes/user.routes.js` -> handler: [`getUserProfile`](controllers/user.controller.js)
+
+### Description
+
+Returns the profile of the currently authenticated user.
+
+### Request
+
+No body required. JWT must be sent via cookie or `Authorization: Bearer <token>` header.
+
+### Responses
+
+- 200 OK
+  - Description: Returns the user profile.
+  - Example:
+
+  ```json
+  {
+    "_id": "60f7f8b9a2e4d34b8c8b4567",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "socketId": null,
+    "__v": 0
+  }
+  ```
+
+- 401 Unauthorized
+  - Description: Missing or invalid token.
+  - Example:
+
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error.
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
+
+## GET /users/logout
+
+Logout the authenticated user.
+
+- URL: `/users/logout`
+- Method: `GET`
+- Content-Type: `application/json`
+- Requires authentication (JWT in cookie or Authorization header)
+- Implemented in: `routes/user.routes.js` -> handler: [`logoutUser`](controllers/user.controller.js)
+
+### Description
+
+Logs out the user by clearing the authentication cookie and blacklisting the JWT token.
+
+### Request
+
+No body required. JWT must be sent via cookie or `Authorization: Bearer <token>` header.
+
+### Responses
+
+- 200 OK
+  - Description: User successfully logged out.
+  - Example:
+
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+
+- 401 Unauthorized
+  - Description: Missing or invalid token.
+  - Example:
+
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error.
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
