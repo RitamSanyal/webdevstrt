@@ -284,3 +284,101 @@ No body required. JWT must be sent via cookie or `Authorization: Bearer <token>`
     "error": "Internal server error"
   }
   ```
+
+# Captain API
+
+## POST /captain/register
+
+Register a new captain (driver).
+
+- URL: `/captains/register`
+- Method: `POST`
+- Content-Type: `application/json`
+- Implemented in: `routes/captain.routes.js` -> handler: [`registerCaptain`](controllers/captain.controller.js)
+
+### Description
+
+Creates a new captain account with vehicle details. Validates incoming data, hashes the password, stores the captain, and returns the created captain object.
+
+### Request body
+
+JSON object with these fields:
+
+- `fullname` (object)
+  - `firstname` (string) — required, minimum 3 characters
+  - `lastname` (string) — required, minimum 3 characters
+- `email` (string) — required, must be a valid email
+- `password` (string) — required, minimum 6 characters
+- `vehicle` (object)
+  - `color` (string) — required, minimum 3 characters
+  - `plate` (string) — required, minimum 3 characters
+  - `capacity` (integer) — required, minimum 1
+  - `vehicleType` (string) — required, must be one of: `bike`, `car`, `auto`
+
+Example:
+
+```json
+{
+  "fullname": {
+    "firstname": "Alice",
+    "lastname": "Smith"
+  },
+  "email": "alice.smith@example.com",
+  "password": "strongPassword456",
+  "vehicle": {
+    "color": "Red",
+    "plate": "AB123CD",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Responses
+
+- 201 Created
+  - Description: Captain successfully created.
+  - Body: JSON containing the created captain object.
+  - Example:
+
+  ```json
+  {
+    "_id": "60f7f8b9a2e4d34b8c8b4568",
+    "fullname": {
+      "firstname": "Alice",
+      "lastname": "Smith"
+    },
+    "email": "alice.smith@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "AB123CD",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "__v": 0
+  }
+  ```
+
+- 400 Bad Request
+  - Description: Validation failed.
+  - Body: `{ "errors": [ { "msg": "...", "param": "...", ... } ] }`
+  - Example:
+
+  ```json
+  {
+    "errors": [
+      { "msg": "Please provide a valid email", "param": "email", "location": "body" }
+    ]
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error (e.g. database failure, unhandled exception).
+  - Body: `{ "error": "Internal server error" }`
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
