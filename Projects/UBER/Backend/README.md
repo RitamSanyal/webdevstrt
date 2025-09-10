@@ -287,7 +287,7 @@ No body required. JWT must be sent via cookie or `Authorization: Bearer <token>`
 
 # Captain API
 
-## POST /captain/register
+## POST /captains/register
 
 Register a new captain (driver).
 
@@ -343,19 +343,22 @@ Example:
 
   ```json
   {
-    "_id": "60f7f8b9a2e4d34b8c8b4568",
-    "fullname": {
-      "firstname": "Alice",
-      "lastname": "Smith"
-    },
-    "email": "alice.smith@example.com",
-    "vehicle": {
-      "color": "Red",
-      "plate": "AB123CD",
-      "capacity": 4,
-      "vehicleType": "car"
-    },
-    "__v": 0
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "captain": {
+      "_id": "60f7f8b9a2e4d34b8c8b4568",
+      "fullname": {
+        "firstname": "Alice",
+        "lastname": "Smith"
+      },
+      "email": "alice.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "AB123CD",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "__v": 0
+    }
   }
   ```
 
@@ -375,6 +378,199 @@ Example:
 - 500 Internal Server Error
   - Description: Unexpected server error (e.g. database failure, unhandled exception).
   - Body: `{ "error": "Internal server error" }`
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
+
+## POST /captains/login
+
+Authenticate an existing captain.
+
+- URL: `/captains/login`
+- Method: `POST`
+- Content-Type: `application/json`
+- Implemented in: `routes/captain.routes.js` -> handler: [`loginCaptain`](controllers/captain.controller.js)
+
+### Description
+
+Authenticates a captain using email and password. Returns a JWT token and the captain object if credentials are valid.
+
+### Request body
+
+JSON object with these fields:
+
+- `email` (string) — required, must be a valid email
+- `password` (string) — required, minimum 6 characters
+
+Example:
+
+```json
+{
+  "email": "alice.smith@example.com",
+  "password": "strongPassword456"
+}
+```
+
+### Responses
+
+- 200 OK
+  - Description: Captain successfully authenticated.
+  - Body: JSON containing `token` (JWT) and `captain` (captain object).
+  - Example:
+
+  ```json
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "captain": {
+      "_id": "60f7f8b9a2e4d34b8c8b4568",
+      "fullname": {
+        "firstname": "Alice",
+        "lastname": "Smith"
+      },
+      "email": "alice.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "AB123CD",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "__v": 0
+    }
+  }
+  ```
+
+- 400 Bad Request
+  - Description: Validation failed or invalid credentials.
+  - Body: `{ "errors": [ { "msg": "...", "param": "...", ... } ] }` or `{ "error": "Invalid email or password" }`
+  - Example:
+
+  ```json
+  {
+    "error": "Invalid email or password"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error.
+  - Body: `{ "error": "Internal server error" }`
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
+
+## GET /captains/profile
+
+Get the authenticated captain's profile.
+
+- URL: `/captains/profile`
+- Method: `GET`
+- Content-Type: `application/json`
+- Requires authentication (JWT in cookie or Authorization header)
+- Implemented in: `routes/captain.routes.js` -> handler: [`getCaptainProfile`](controllers/captain.controller.js)
+
+### Description
+
+Returns the profile of the currently authenticated captain.
+
+### Request
+
+No body required. JWT must be sent via cookie or `Authorization: Bearer <token>` header.
+
+### Responses
+
+- 200 OK
+  - Description: Returns the captain profile.
+  - Example:
+
+  ```json
+  {
+    "captain": {
+      "_id": "60f7f8b9a2e4d34b8c8b4568",
+      "fullname": {
+        "firstname": "Alice",
+        "lastname": "Smith"
+      },
+      "email": "alice.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "AB123CD",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "__v": 0
+    }
+  }
+  ```
+
+- 401 Unauthorized
+  - Description: Missing or invalid token.
+  - Example:
+
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error.
+  - Example:
+
+  ```json
+  {
+    "error": "Internal server error"
+  }
+  ```
+
+## GET /captains/logout
+
+Logout the authenticated captain.
+
+- URL: `/captains/logout`
+- Method: `GET`
+- Content-Type: `application/json`
+- Requires authentication (JWT in cookie or Authorization header)
+- Implemented in: `routes/captain.routes.js` -> handler: [`logoutCaptain`](controllers/captain.controller.js)
+
+### Description
+
+Logs out the captain by clearing the authentication cookie and blacklisting the JWT token.
+
+### Request
+
+No body required. JWT must be sent via cookie or `Authorization: Bearer <token>` header.
+
+### Responses
+
+- 200 OK
+  - Description: Captain successfully logged out.
+  - Example:
+
+  ```json
+  {
+    "message": "Logged out successfully."
+  }
+  ```
+
+- 401 Unauthorized
+  - Description: Missing or invalid token.
+  - Example:
+
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+- 500 Internal Server Error
+  - Description: Unexpected server error.
   - Example:
 
   ```json
