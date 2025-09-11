@@ -6,11 +6,11 @@ const UserLogin = () => {
     const [password, setPassword] = useState('')
     const [userData, setUserData] = useState({})
 
-    const submitHandler = (e)=>{
+    const submitHandler = (e) => {
         e.preventDefault()
         setUserData({
-            email:email,
-            password:password
+            email: email,
+            password: password
         })
         setEmail('')
         setPassword('')
@@ -19,7 +19,8 @@ const UserLogin = () => {
         <div className="p-7 flex flex-col justify-between h-screen">
             <div>
                 <img className="w-16 mb-10" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
-                <form onSubmit={(e)=>{
+                <h1 className="font-extrabold text-2xl mb-3">Welcome User</h1>
+                <form onSubmit={(e) => {
                     submitHandler(e)
                 }} action="">
                     <h3 className="text-lg font-medium mb-2">Whats your email ?</h3>
@@ -46,13 +47,15 @@ const UserLogin = () => {
                         Login
                     </button>
                 </form>
-                    <p className="text-center">New Here ? <Link to='/signup' className="text-blue-600">Create New Account</Link></p>
+                <p className="text-center">New Here ? <Link to='/signup' className="text-blue-600">Create New Account</Link></p>
             </div>
             <div>
                 <Link
                     to='/captain-login'
                     className="bg-[#10b461] flex items-center justify-center text-white font-semibold mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base"
-                >Sign In as Captain</Link>
+                >
+                    Sign In as Captain
+                </Link>
             </div>
         </div>
     )
