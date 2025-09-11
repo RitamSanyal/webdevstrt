@@ -1,6 +1,6 @@
 const UserSinup = () => {
     return (
-        <div>UserSinup</div>
+        <div>UserSignup</div>
     )
 }
 

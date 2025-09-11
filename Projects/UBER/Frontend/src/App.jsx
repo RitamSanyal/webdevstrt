@@ -3,7 +3,7 @@ import Home from './pages/Home'
 import CaptainLogin from './pages/CaptainLogin'
 import CaptainSignup from './pages/CaptainSignup'
 import UserLogin from './pages/UserLogin'
-import UserSinup from './pages/UserSinup'
+import UserSignup from './pages/UserSignup'
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
         <Route path='/captain-login' element={<CaptainLogin />} />
         <Route path='/captain-signup' element={<CaptainSignup />} />
         <Route path='/login' element={<UserLogin />} />
-        <Route path='/signup' element={<UserSinup />} />
+        <Route path='/signup' element={<UserSignup />} />
       </Routes>
     </div>
   )
