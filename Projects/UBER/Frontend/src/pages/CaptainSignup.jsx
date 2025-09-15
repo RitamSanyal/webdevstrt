@@ -17,7 +17,7 @@ const CaptainSignup = () => {
     const [vehicleType, setVehicleType] = useState('')
     // const [captainData, setCaptainData] = useState({})
 
-    const {captain, setCaptain} = useContext(CaptainDataContext)
+    const {setCaptain} = useContext(CaptainDataContext)
 
     const submitHandler = async (e) => {
         e.preventDefault()
