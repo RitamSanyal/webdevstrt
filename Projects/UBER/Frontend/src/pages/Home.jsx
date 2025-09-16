@@ -8,8 +8,10 @@ const Home = () => {
   const [pickup, setPickup] = useState('')
   const [destination, setDestination] = useState('')
   const [panelOpen, setPanelOpen] = useState(false)
+  const vehiclePanelRef = useRef(null)
   const panelRef = useRef(null)
   const pannelCloseRef = useRef(null)
+  const [vehiclePanel, setVehiclePanel] = useState(false)
 
 
   const submitHandler = (e) => {
@@ -36,25 +38,54 @@ const Home = () => {
         height: '0%',
         padding: 0,
         opacity: 0,
-        duration: 0.7,
+        duration: 1,
         ease: "power3.out",
-        delay: 0.3
+        delay: 0.1
       })
       gsap.to(pannelCloseRef.current, {
         opacity: 0,
-        duration: 0.5,
+        duration: 0.8,
         delay: 0.5,
         ease: "power3.out"
       })
     }
   }, [panelOpen, pannelCloseRef])
 
+  useGSAP(function () {
+    if (vehiclePanel) {
+      gsap.to(vehiclePanelRef.current, {
+        transform: 'translateY(0)',
+        duration: 0.7,
+        ease: "power3.out"
+      })
+      gsap.to(pannelCloseRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        delay: 0.3,
+        ease: "power3.out"
+      })
+    } else {
+      gsap.to(vehiclePanelRef.current, {
+        transform: 'translateY(100%)',
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.1
+      })
+      gsap.to(pannelCloseRef.current, {
+        opacity: 0,
+        ease: "power3.out"
+      })
+    }
+  }, [vehiclePanel,pannelCloseRef])
+
   return (
     <div className="h-screen relative overflow-hidden">
       <img className="w-16 absolute left-5 top-5" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
+
       <div className="h-screen w-screen">
         <img className="h-full w-full object-cover" src="https://www.oreilly.com/api/v2/epubs/urn:orm:book:9781788623230/files/assets/8fd4ce32-21f9-409f-844a-9a1c8604e6e3.png" alt="" />
       </div>
+
       <div className="flex flex-col justify-end h-screen absolute top-0 w-full">
         <div className="h-[30%] p-6 bg-white relative">
           <h5 ref={pannelCloseRef} onClick={() => {
@@ -92,11 +123,16 @@ const Home = () => {
           </form>
         </div>
         <div ref={panelRef} className="opacity-0 bg-white h-0">
-          <LocationSearchPanel />
+          <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanel} />
         </div>
       </div>
-      <div className="fixed w-full z-10 translate-y-full bg-white bottom-0 px-3 py-8">
-      <h3 className="text-2xl font-semibold mb-5">Choose A Vehicle</h3>
+
+      <div ref={vehiclePanelRef} className="fixed w-full z-10 translate-y-full bg-white bottom-0 px-3 py-8">
+        <h5 onClick={() => {
+          setVehiclePanel(false)
+        }} className="p-3 text-center absolute top-0 right-0 text-2xl"><i className="ri-arrow-down-wide-line"></i></h5>
+        <h3 className="text-2xl font-semibold mb-5">Choose A Vehicle</h3>
+
         <div className="flex border-2 border-gray-100 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between">
           <img className="h-10" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
           <div className="ml-2 w-1/2">
@@ -106,6 +142,7 @@ const Home = () => {
           </div>
           <h2 className="text-lg font-semibold">₹193.20</h2>
         </div>
+
         <div className="flex border-2 border-gray-100 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between">
           <img className="h-10" src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=368/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy8yYzdmYTE5NC1jOTU0LTQ5YjItOWM2ZC1hM2I4NjAxMzcwZjUucG5n" alt="" />
           <div className="ml-2 w-1/2">
@@ -115,6 +152,7 @@ const Home = () => {
           </div>
           <h2 className="text-lg font-semibold">₹53.70</h2>
         </div>
+
         <div className="flex border-2 border-gray-100 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between">
           <img className="h-10" src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=368/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy8xZGRiOGM1Ni0wMjA0LTRjZTQtODFjZS01NmExMWEwN2ZlOTgucG5n" alt="" />
           <div className="ml-2 w-1/2">
@@ -124,6 +162,7 @@ const Home = () => {
           </div>
           <h2 className="text-lg font-semibold">₹100.18</h2>
         </div>
+
       </div>
     </div>
   )
