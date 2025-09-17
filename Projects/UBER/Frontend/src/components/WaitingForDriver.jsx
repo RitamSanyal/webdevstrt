@@ -1,13 +1,17 @@
-const ConfirmRide = (props) => {
+const WaitingForDriver = () => {
   return (
     <div>
-      <h5 onClick={() => {
-        props.setConfirmRidePanel(false)
-      }} className="p-3 text-center absolute top-0 right-0 text-2xl"><i className="ri-arrow-down-wide-line"></i></h5>
-      <h3 className="text-2xl font-semibold mb-5">Confirm your ride</h3>
+
+      <div className="flex items-center justify-between">
+        <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
+        <div className="text-right">
+          <h2 className="text-lg font-medium">Ritam</h2>
+          <h4 className="text-xl font-semibold -mt-1 -mb-1">WB26 AU 6144</h4>
+          <p className="text-sm text-gray-600">Tata Tiago XE</p>
+        </div>
+      </div>
 
       <div className="flex gap-2 justify-between flex-col items-center">
-        <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
         <div className="w-full mt-5">
 
           <div className="flex items-center gap-5 p-3 border-b-1 border-gray-300">
@@ -34,13 +38,9 @@ const ConfirmRide = (props) => {
             </div>
           </div>
         </div>
-        <button onClick={()=>{
-          props.setConfirmRidePanel(false)
-          props.setVehicleFound(true)
-        }} className="w-full mt-5 bg-green-900 text-white font-semibold p-2 rounded-lg">Confirm Ride</button>
       </div>
     </div>
   )
 }
 
-export default ConfirmRide
+export default WaitingForDriver
