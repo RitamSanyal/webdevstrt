@@ -7,7 +7,8 @@ const CaptainProtectWrapper = ({ children }) => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const { setCaptain } = useContext(CaptainDataContext)
-    const [ isLoading, setIsLoading ] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
         if (!token) {
@@ -24,7 +25,7 @@ const CaptainProtectWrapper = ({ children }) => {
             setCaptain(response.data.captain)
             setIsLoading(false)
         }
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err)
         localStorage.removeItem('token')
         navigate('/captain-login')

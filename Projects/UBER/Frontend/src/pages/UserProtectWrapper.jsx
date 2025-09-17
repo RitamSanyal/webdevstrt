@@ -6,8 +6,8 @@ import axios from "axios"
 const UserProtectWrapper = ({ children }) => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-    const {setUser} = useContext(UserDataContext)
-    const [ isLoading, setIsLoading ] = useState(true)
+    const { setUser } = useContext(UserDataContext)
+    const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const UserProtectWrapper = ({ children }) => {
             setUser(response.data.user)
             setIsLoading(false)
         }
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err)
         localStorage.removeItem('token')
         navigate('/login')
