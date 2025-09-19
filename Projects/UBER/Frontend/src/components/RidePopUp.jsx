@@ -5,7 +5,7 @@ const RidePopUp = (props) => {
                 props.setridePopupPanel(false)
             }} className="p-3 text-center absolute top-0 right-0 text-2xl"><i className="ri-arrow-down-wide-line"></i></h5>
             <h3 className="text-2xl font-semibold mb-5">New Ride Available!</h3>
-            
+
             <div className="flex items-center justify-between p-3 bg-gray-200 rounded-lg mt-4">
                 <div className="flex items-center gap-3">
                     <img className="h-15 w-15 rounded-full object-cover" src="RitamSanyal.jpeg" alt="" />
@@ -41,12 +41,17 @@ const RidePopUp = (props) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={() => {
-                    
-                }} className="w-full mt-3 bg-green-900 text-white font-semibold p-2 rounded-lg">Confirm Ride</button>
-                <button onClick={() => {
-                    props.setridePopupPanel(false)
-                }} className="w-full mt-1 bg-red-900 text-white font-semibold p-2 rounded-lg">Ignore Ride</button>
+
+                <div className="flex items-center justify-between gap-22">
+                    <button onClick={() => {
+                        props.setridePopupPanel(false)
+                    }} className="bg-red-900 active:bg-red-700 text-white font-semibold p-4 rounded-lg">Ignore Ride</button>
+                    <button onClick={() => {
+                        props.setConfirmRidePopUpPanel(true)
+                        props.setridePopupPanel(false)
+                    }} className="bg-green-900 active:bg-green-700 text-white font-semibold p-4 rounded-lg">Accept Ride</button>
+                </div>
+
             </div>
         </div>
     )
