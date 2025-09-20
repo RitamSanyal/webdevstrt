@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 const ConfirmRidePopUp = (props) => {
+
   const navigate = useNavigate();
+  const [otp, setOtp] = useState('')
+  const submitHandler = (e) => {
+    console.log(e)
+  }
 
   return (
     <div>
@@ -47,14 +53,19 @@ const ConfirmRidePopUp = (props) => {
           </div>
         </div>
 
-        <div className="flex justify-between gap-22">
-          <button onClick={() => {
-            props.setConfirmRidePopUpPanel(false)
-            props.setridePopupPanel(false)
-          }} className="bg-red-900 active:bg-red-700 text-white font-semibold p-4 rounded-lg">Cancel Ride</button>
-          <button onClick={() => {
-            navigate('/captain-riding')
-          }} className="bg-green-900 active:bg-green-700 text-white font-semibold p-4 rounded-lg">Confirm Ride</button>
+        <div className="mt-6 w-full">
+          <form onSubmit={(e)=>{
+            submitHandler(e)
+          }}>
+            <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" className="bg-[#eee] px-6 py-5 font-mono text-base rounded-lg w-full mt-3 mb-2" placeholder="Enter OTP" />
+            <button onClick={() => {
+              navigate('/captain-riding')
+            }} className="bg-green-900 active:bg-green-700 w-full text-white font-semibold p-2 rounded-lg mt-3">Confirm Ride</button>
+            <button onClick={() => {
+              props.setConfirmRidePopUpPanel(false)
+              props.setridePopupPanel(false)
+            }} className="bg-red-900 active:bg-red-700 w-full text-white font-semibold p-2 rounded-lg mt-3">Cancel Ride</button>
+          </form>
         </div>
 
       </div>
