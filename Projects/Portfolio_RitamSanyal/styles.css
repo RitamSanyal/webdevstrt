@@ -82,7 +82,7 @@ h2 {
 }
 
 .btn:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0) scale(1.50);
 }
 
 .header-btn {
