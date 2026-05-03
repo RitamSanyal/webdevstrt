@@ -66,4 +66,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 5. Infinite Scroll for Certificates
+    const certificatesTrack = document.querySelector('.certificates-track');
+    if (certificatesTrack) {
+        const cards = Array.from(certificatesTrack.children);
+        
+        // Clone the cards multiple times to ensure the track is long enough
+        for (let i = 0; i < 3; i++) {
+            cards.forEach(card => {
+                const clone = card.cloneNode(true);
+                certificatesTrack.appendChild(clone);
+            });
+        }
+    }
+
+    // 6. Certificate Modal Logic
+    const modal = document.getElementById('cert-modal');
+    const modalFrame = document.getElementById('pdf-viewer');
+    const closeModal = document.querySelector('.close-modal');
+
+    // Use event delegation for anything with data-pdf
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-pdf]');
+        if (trigger) {
+            const pdfPath = trigger.getAttribute('data-pdf');
+            if (pdfPath && pdfPath !== '#') {
+                modalFrame.src = pdfPath;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+            }
+        }
+
+        if (e.target === modal || e.target === closeModal) {
+            modal.style.display = 'none';
+            modalFrame.src = ''; // Clear iframe
+            document.body.style.overflow = 'auto'; // Re-enable scroll
+        }
+    });
 });

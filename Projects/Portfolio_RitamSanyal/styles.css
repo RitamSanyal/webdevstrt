@@ -253,6 +253,157 @@ h2::after {
     margin-bottom: 15px;
 }
 
+/* Certificates Section */
+.certificates-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.certificates-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.certificates-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.certificates-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+.certificates-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+}
+
+.certificates-track:hover,
+.certificates-track:active {
+    animation-play-state: paused;
+}
+
+.certificate-card {
+    width: 280px;
+    flex-shrink: 0;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.cert-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.cert-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.education-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 25px 35px;
+}
+
+.edu-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.edu-view-btn:hover {
+    background: rgba(56, 189, 248, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+.edu-view-btn i {
+    font-size: 1rem;
+    margin: 0;
+    color: inherit;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--card-bg);
+    margin: 5% auto;
+    padding: 40px 15px 15px;
+    width: 80%;
+    height: 80vh;
+    border-radius: 15px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    color: var(--text-primary);
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+}
+
+#pdf-viewer {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* We now have 4 sets of cards (original + 3 clones). 
+           Moving -25% corresponds to moving past exactly one full set. */
+        transform: translateX(-25%);
+    }
+}
+
 /* Contact Grid */
 .contact-grid {
     display: grid;
@@ -375,5 +526,13 @@ h2::after {
 
     h1 {
         font-size: 3rem;
+    }
+
+    .education-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 20px;
+        padding: 25px;
     }
 }

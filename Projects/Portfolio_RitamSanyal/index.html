@@ -22,6 +22,8 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certificates">Certificates</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -45,7 +47,7 @@
             </div>
 
             <div class="profile-img">
-                <img src="assets/RitamSanyal.png" alt="Ritam Sanyal">
+                <img src="assets/Ritam.jpg" alt="Ritam Sanyal">
             </div>
         </div>
     </header>
@@ -147,13 +149,75 @@
     <section id="education" class="container section reveal">
         <h2>Education</h2>
 
-        <div class="card">
-            <h3>B.Tech - Information Technology</h3>
-            <p class="meta">Guru Nanak Institute of Technology | 2021 – 2025</p>
-            <p>CGPA: 7.80</p>
+        <div class="card education-card">
+            <div class="edu-info">
+                <h3>B.Tech - Information Technology</h3>
+                <p class="meta">Guru Nanak Institute of Technology | 2021 – 2025</p>
+                <p>CGPA: 7.80</p>
+            </div>
+            <!-- Update data-pdf with your degree certificate file path -->
+            <button class="edu-view-btn" data-pdf="assets/in.ac.makautwb-DGCER-5004210100632025211430100210070.pdf">
+                <i class="fas fa-file-pdf"></i> View Degree
+            </button>
         </div>
     </section>
 
+    <section id="certificates" class="container section reveal">
+        <h2>Certificates</h2>
+        <div class="certificates-wrapper">
+            <div class="certificates-track">
+
+                <div class="card certificate-card" data-pdf="assets/Coursera_U2K3EQYKEGRJ.pdf">
+                    <i class="fas fa-award cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>Data Structures</h3>
+                        <p class="meta">Coursera | 2022</p>
+                    </div>
+                </div>
+
+                <div class="card certificate-card" data-pdf="assets/Coursera_AY9FSYNLZ2HT(SQL).pdf">
+                    <i class="fas fa-award cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>SQL</h3>
+                        <p class="meta">Coursera | 2023</p>
+                    </div>
+                </div>
+                
+                <div class="card certificate-card" data-pdf="assets/Coursera_YC4UKA4JTCAN.pdf">
+                    <i class="fas fa-award cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>Java Programming</h3>
+                        <p class="meta">Coursera | 2023</p>
+                    </div>
+                </div>
+
+                <div class="card certificate-card" data-pdf="assets/EISystems_Internship_Certificate.pdf">
+                    <i class="fas fa-award cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>Internship Certificate</h3>
+                        <p class="meta">EI Systems Technologies | 2024</p>
+                    </div>
+                </div>
+
+                <div class="card certificate-card" data-pdf="assets/BlockStars_Experience_letter_Ritam.pdf">
+                    <i class="fas fa-award cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>Experience Letter</h3>
+                        <p class="meta">Block-Stars Pvt. Ltd. | 2025</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal Viewer -->
+    <div id="cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+        </div>
+    </div>
     <section id="contact" class="container section reveal">
         <h2>Contact</h2>
 
