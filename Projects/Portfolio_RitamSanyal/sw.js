@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritam-portfolio-v1';
+const CACHE_NAME = 'ritam-portfolio-v2';
 const ASSETS = [
     './',
     './index.html',
@@ -16,6 +16,7 @@ const ASSETS = [
 
 // Install Event
 self.addEventListener('install', (e) => {
+    self.skipWaiting();
     e.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS);
@@ -26,23 +27,43 @@ self.addEventListener('install', (e) => {
 // Activate Event
 self.addEventListener('activate', (e) => {
     e.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.map((key) => {
-                    if (key !== CACHE_NAME) {
-                        return caches.delete(key);
-                    }
-                })
-            );
-        })
+        Promise.all([
+            self.clients.claim(),
+            caches.keys().then((keys) => {
+                return Promise.all(
+                    keys.map((key) => {
+                        if (key !== CACHE_NAME) {
+                            return caches.delete(key);
+                        }
+                    })
+                );
+            })
+        ])
     );
 });
 
-// Fetch Event
+// Fetch Event - Network First Strategy
 self.addEventListener('fetch', (e) => {
+    // Only intercept GET requests
+    if (e.request.method !== 'GET') {
+        return;
+    }
+
     e.respondWith(
-        caches.match(e.request).then((cachedResponse) => {
-            return cachedResponse || fetch(e.request);
-        })
+        fetch(e.request)
+            .then((networkResponse) => {
+                // Update the cache with the new response clone
+                if (networkResponse && networkResponse.status === 200) {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, responseClone);
+                    });
+                }
+                return networkResponse;
+            })
+            .catch(() => {
+                // Fallback to cache if network fails (offline)
+                return caches.match(e.request);
+            })
     );
 });
