@@ -992,3 +992,8 @@ h2::after {
         padding: 30px 20px;
     }
 }
+
+/* Security Helper Classes */
+.hidden-field {
+    display: none !important;
+}

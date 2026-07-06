@@ -49,6 +49,12 @@ self.addEventListener('fetch', (e) => {
         return;
     }
 
+    // Only intercept http/https requests to avoid TypeErrors with other protocols (e.g., chrome-extension)
+    const url = new URL(e.request.url);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+        return;
+    }
+
     e.respondWith(
         fetch(e.request)
             .then((networkResponse) => {

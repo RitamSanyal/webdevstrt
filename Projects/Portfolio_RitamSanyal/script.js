@@ -230,10 +230,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('name');
             const emailInput = document.getElementById('email');
             const messageInput = document.getElementById('message');
+            const botcheckInput = document.getElementById('botcheck');
 
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
             const message = messageInput ? messageInput.value.trim() : '';
+            const isBot = botcheckInput ? botcheckInput.checked : false;
 
             // Clean previous status
             if (formStatus) {
@@ -251,6 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showStatus('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            // Honeypot check (deceive spambots with fake success response)
+            if (isBot) {
+                showStatus('Thank you! Your message has been sent successfully.', 'success');
+                if (contactForm) contactForm.reset();
                 return;
             }
 
@@ -281,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         name: name,
                         email: email,
                         message: message,
+                        botcheck: isBot,
                         subject: "New Message from Portfolio Website"
                     })
                 });
