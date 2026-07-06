@@ -13,10 +13,17 @@
 </head>
 
 <body>
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar" class="progress-bar"></div>
+
+    <!-- Background Glowing Orbs -->
+    <div class="glowing-orb orb-1"></div>
+    <div class="glowing-orb orb-2"></div>
+
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">RS</div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -26,6 +33,11 @@
                 <li><a href="#certificates">Certificates</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="hamburger-toggle" id="hamburger-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -98,25 +110,31 @@
     <section id="experience" class="container section reveal">
         <h2>Experience</h2>
 
-        <div class="card-container">
-            <div class="card">
-                <h3>Full Stack Developer Intern</h3>
-                <p class="meta">Block-Stars Pvt. Ltd. | Mar 2025 – May 2025</p>
-                <ul>
-                    <li>Optimized web components improving efficiency by 20%</li>
-                    <li>Improved database query performance by 15%</li>
-                    <li>Delivered assigned tasks on time in an SDE-1 role</li>
-                </ul>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content card">
+                    <h3>Full Stack Developer Intern</h3>
+                    <p class="meta">Block-Stars Pvt. Ltd. | Mar 2025 – May 2025</p>
+                    <ul>
+                        <li>Optimized web components improving efficiency by 20%</li>
+                        <li>Improved database query performance by 15%</li>
+                        <li>Delivered assigned tasks on time in an SDE-1 role</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="card">
-                <h3>Software Developer Intern</h3>
-                <p class="meta">EI Systems Technologies | Feb 2024 – Mar 2024</p>
-                <ul>
-                    <li>Worked on backend APIs and frontend integration</li>
-                    <li>Reduced system errors by 30%</li>
-                    <li>Improved application stability through testing</li>
-                </ul>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content card">
+                    <h3>Software Developer Intern</h3>
+                    <p class="meta">EI Systems Technologies | Feb 2024 – Mar 2024</p>
+                    <ul>
+                        <li>Worked on backend APIs and frontend integration</li>
+                        <li>Reduced system errors by 30%</li>
+                        <li>Improved application stability through testing</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -124,8 +142,14 @@
     <section id="projects" class="container section reveal">
         <h2>Projects</h2>
 
-        <div class="card-container">
-            <div class="card">
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Apps</button>
+            <button class="filter-btn" data-filter="ml">ML / AI</button>
+        </div>
+
+        <div class="card-container project-list">
+            <div class="card project-card" data-category="web">
                 <h3>Intelligent Tutoring System</h3>
                 <ul>
                     <li>Full stack web app using Node.js, Express, MongoDB</li>
@@ -135,7 +159,7 @@
                 </ul>
             </div>
 
-            <div class="card">
+            <div class="card project-card" data-category="ml">
                 <h3>Face Recognition System</h3>
                 <ul>
                     <li>Built using TensorFlow and OpenCV</li>
@@ -149,16 +173,21 @@
     <section id="education" class="container section reveal">
         <h2>Education</h2>
 
-        <div class="card education-card">
-            <div class="edu-info">
-                <h3>B.Tech - Information Technology</h3>
-                <p class="meta">Guru Nanak Institute of Technology | 2021 – 2025</p>
-                <p>CGPA: 7.80</p>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content card education-card">
+                    <div class="edu-info">
+                        <h3>B.Tech - Information Technology</h3>
+                        <p class="meta">Guru Nanak Institute of Technology | 2021 – 2025</p>
+                        <p>CGPA: 7.80</p>
+                    </div>
+                    <!-- Update data-pdf with your degree certificate file path -->
+                    <button class="edu-view-btn" data-pdf="assets/in.ac.makautwb-DGCER-5004210100632025211430100210070.pdf">
+                        <i class="fas fa-file-pdf"></i> View Degree
+                    </button>
+                </div>
             </div>
-            <!-- Update data-pdf with your degree certificate file path -->
-            <button class="edu-view-btn" data-pdf="assets/in.ac.makautwb-DGCER-5004210100632025211430100210070.pdf">
-                <i class="fas fa-file-pdf"></i> View Degree
-            </button>
         </div>
     </section>
 
@@ -214,30 +243,63 @@
     <!-- Certificate Modal Viewer -->
     <div id="cert-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+            <div class="modal-header">
+                <h3>Certificate Viewer</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-loader" class="modal-loader">
+                    <i class="fas fa-circle-notch fa-spin"></i> Loading document...
+                </div>
+                <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
     <section id="contact" class="container section reveal">
         <h2>Contact</h2>
 
-        <div class="contact-grid">
-            <a href="mailto:ritamsanyal.work@gmail.com" class="card contact-card">
-                <i class="fas fa-envelope"></i>
-                <p>ritamsanyal.work@gmail.com</p>
-            </a>
-            <div class="card contact-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>Kolkata, West Bengal, India</p>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <div class="contact-grid">
+                    <a href="mailto:ritamsanyal.work@gmail.com" class="card contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <p>ritamsanyal.work@gmail.com</p>
+                    </a>
+                    <div class="card contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Kolkata, West Bengal, India</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/ritamsanyal/" target="_blank" rel="noopener noreferrer" class="card contact-card">
+                        <i class="fab fa-linkedin"></i>
+                        <p>LinkedIn Profile</p>
+                    </a>
+                    <a href="https://github.com/RitamSanyal" target="_blank" rel="noopener noreferrer" class="card contact-card">
+                        <i class="fab fa-github"></i>
+                        <p>GitHub Profile</p>
+                    </a>
+                </div>
             </div>
-            <a href="https://www.linkedin.com/in/ritamsanyal/" target="_blank" rel="noopener noreferrer" class="card contact-card">
-                <i class="fab fa-linkedin"></i>
-                <p>LinkedIn Profile</p>
-            </a>
-            <a href="https://github.com/RitamSanyal" target="_blank" rel="noopener noreferrer" class="card contact-card">
-                <i class="fab fa-github"></i>
-                <p>GitHub Profile</p>
-            </a>
+
+            <div class="card contact-form-card">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder=" " required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                    <div id="form-status" class="form-status"></div>
+                </form>
+            </div>
         </div>
     </section>
 
