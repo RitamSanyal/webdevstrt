@@ -346,12 +346,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 12. Service Worker Registration
+    // 12. Service Worker Unregistration (Clean up caching feature)
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Service Worker registered successfully with scope:', reg.scope))
-                .catch(err => console.error('Service Worker registration failed:', err));
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+            for (let registration of registrations) {
+                registration.unregister()
+                    .then(() => console.log('Service Worker unregistered successfully'))
+                    .catch(err => console.error('Failed to unregister Service Worker:', err));
+            }
         });
     }
 });
