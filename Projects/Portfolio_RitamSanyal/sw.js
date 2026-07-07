@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritam-portfolio-v2';
+const CACHE_NAME = 'ritam-portfolio-v3';
 const ASSETS = [
     './',
     './index.html',
@@ -42,7 +42,7 @@ self.addEventListener('activate', (e) => {
     );
 });
 
-// Fetch Event - Network First Strategy
+// Fetch Event
 self.addEventListener('fetch', (e) => {
     // Only intercept GET requests
     if (e.request.method !== 'GET') {
@@ -55,10 +55,64 @@ self.addEventListener('fetch', (e) => {
         return;
     }
 
+    // 1. Stale-While-Revalidate for main document / HTML requests
+    if (e.request.mode === 'navigate' || url.pathname.endsWith('index.html') || url.pathname === '/') {
+        e.respondWith(
+            caches.match(e.request).then((cachedResponse) => {
+                const fetchPromise = fetch(e.request).then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(e.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                }).catch(() => {
+                    // If network fails and cachedResponse wasn't found, try caching fallback
+                    return caches.match(e.request).then((fallback) => {
+                        return fallback || caches.match('./index.html') || caches.match('/');
+                    });
+                });
+
+                return cachedResponse || fetchPromise;
+            })
+        );
+        return;
+    }
+
+    // 2. Cache First Strategy for static assets
+    const isStaticAsset = 
+        ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', ''))) ||
+        url.pathname.includes('/assets/') ||
+        url.hostname.includes('fonts.googleapis.com') ||
+        url.hostname.includes('fonts.gstatic.com') ||
+        url.hostname.includes('cdnjs.cloudflare.com') ||
+        /\.(js|css|png|jpg|jpeg|gif|svg|ico|pdf|woff|woff2|ttf|eot)$/i.test(url.pathname);
+
+    if (isStaticAsset) {
+        e.respondWith(
+            caches.match(e.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+                return fetch(e.request).then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(e.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                });
+            })
+        );
+        return;
+    }
+
+    // 3. Default to Network First Strategy for APIs / other requests
     e.respondWith(
         fetch(e.request)
             .then((networkResponse) => {
-                // Update the cache with the new response clone
                 if (networkResponse && networkResponse.status === 200) {
                     const responseClone = networkResponse.clone();
                     caches.open(CACHE_NAME).then((cache) => {
@@ -68,7 +122,6 @@ self.addEventListener('fetch', (e) => {
                 return networkResponse;
             })
             .catch(() => {
-                // Fallback to cache if network fails (offline)
                 return caches.match(e.request);
             })
     );
