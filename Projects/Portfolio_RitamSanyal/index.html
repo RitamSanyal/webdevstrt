@@ -252,7 +252,7 @@
                 <div id="modal-loader" class="modal-loader">
                     <i class="fas fa-circle-notch fa-spin"></i> Loading document...
                 </div>
-                <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+                <iframe id="pdf-viewer" src="" frameborder="0" title="Certificate PDF Viewer"></iframe>
             </div>
         </div>
     </div>
@@ -283,6 +283,9 @@
 
             <div class="card contact-form-card">
                 <form id="contact-form">
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="2edb3723-4606-499b-a110-dafcffc6a1cf">
+                    
                     <!-- Honeypot field for bot protection -->
                     <input type="checkbox" name="botcheck" id="botcheck" class="hidden-field" tabindex="-1" autocomplete="off">
                     

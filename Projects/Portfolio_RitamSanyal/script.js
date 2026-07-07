@@ -93,11 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (trigger) {
             const pdfPath = trigger.getAttribute('data-pdf');
             if (pdfPath && pdfPath !== '#') {
+                // Security Validation: Ensure the path is safe to load (starts with 'assets/' or './assets/'),
+                // does not attempt directory traversal ('..'), and is not a dangerous protocol.
+                const isSafePath = (pdfPath.startsWith('assets/') || pdfPath.startsWith('./assets/')) &&
+                                   !pdfPath.includes('..') &&
+                                   !pdfPath.toLowerCase().startsWith('javascript:') &&
+                                   !pdfPath.toLowerCase().startsWith('data:');
+
+                if (!isSafePath) {
+                    console.error('Blocked loading of potentially unsafe path:', pdfPath);
+                    return;
+                }
+
                 // Mobile Chrome & Safari do not support rendering PDFs inside iframes.
                 // Open PDF in a new tab on mobile or small screens for a better native reading experience.
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
                 if (isMobile) {
-                    window.open(pdfPath, '_blank');
+                    window.open(pdfPath, '_blank', 'noopener,noreferrer');
                     return;
                 }
 
@@ -229,8 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('form-status');
     const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
 
-    const WEB3FORMS_ACCESS_KEY = '2edb3723-4606-499b-a110-dafcffc6a1cf';
-
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -281,9 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
             showStatus('Sending your message...', 'loading');
 
             try {
-                const apiKey = WEB3FORMS_ACCESS_KEY;
+                const accessKeyInput = contactForm.querySelector('input[name="access_key"]');
+                const apiKey = accessKeyInput ? accessKeyInput.value.trim() : '';
                 if (!apiKey) {
-                    throw new Error('Web3Forms Access Key is not configured.');
+                    throw new Error('Web3Forms Access Key is not configured. Please add a hidden input with name="access_key" to the contact form.');
                 }
 
                 // Actual request to Web3Forms API
