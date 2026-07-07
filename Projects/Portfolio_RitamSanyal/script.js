@@ -93,6 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (trigger) {
             const pdfPath = trigger.getAttribute('data-pdf');
             if (pdfPath && pdfPath !== '#') {
+                // Mobile Chrome & Safari do not support rendering PDFs inside iframes.
+                // Open PDF in a new tab on mobile or small screens for a better native reading experience.
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+                if (isMobile) {
+                    window.open(pdfPath, '_blank');
+                    return;
+                }
+
                 // Show loader, hide iframe initially for transition
                 if (modalLoader) modalLoader.style.display = 'flex';
                 modalFrame.style.opacity = '0';
