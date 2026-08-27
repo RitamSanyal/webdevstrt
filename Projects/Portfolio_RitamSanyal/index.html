@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; img-src 'self' data:; frame-src 'self'; form-action 'self' https://api.web3forms.com; object-src 'none';" />
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; img-src 'self' data:; frame-src 'self'; form-action 'self' https://api.web3forms.com; object-src 'self'; upgrade-insecure-requests;" />
     <title>Ritam Sanyal | Portfolio</title>
-    <!-- Google Fonts: Poppins -->
+    <!-- Google Fonts Preconnect & Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
-    <!-- FontAwesome for Social Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- FontAwesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -255,7 +260,7 @@
                 <div id="modal-loader" class="modal-loader">
                     <i class="fas fa-circle-notch fa-spin"></i> Loading document...
                 </div>
-                <iframe id="pdf-viewer" src="" frameborder="0" title="Certificate PDF Viewer"></iframe>
+                <iframe id="pdf-viewer" src="about:blank" frameborder="0" title="Certificate PDF Viewer"></iframe>
             </div>
         </div>
     </div>
@@ -287,13 +292,13 @@
             </div>
 
             <div class="card contact-form-card">
-                <form id="contact-form">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
                     <!-- Web3Forms Access Key -->
                     <input type="hidden" name="access_key" value="2edb3723-4606-499b-a110-dafcffc6a1cf" />
 
                     <!-- Honeypot field for bot protection -->
                     <input type="checkbox" name="botcheck" id="botcheck" class="hidden-field" tabindex="-1"
-                        autocomplete="off" />
+                        autocomplete="off" aria-hidden="true" />
 
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder=" " maxlength="100" required />
@@ -311,7 +316,7 @@
                     <button type="submit" class="btn submit-btn">
                         <i class="fas fa-paper-plane"></i> Send Message
                     </button>
-                    <div id="form-status" class="form-status"></div>
+                    <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
                 </form>
             </div>
         </div>

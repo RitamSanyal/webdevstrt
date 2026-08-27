@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         navLinks.forEach((link) => {
             link.classList.remove("active-nav");
-            if (link.getAttribute("href").includes(current)) {
+            if (current && link.getAttribute("href") === `#${current}`) {
                 link.classList.add("active-nav");
             }
         });
@@ -57,15 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Smooth Scrolling (Enhancement for older browsers)
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
-            e.preventDefault();
             const targetId = link.getAttribute("href");
-            const targetSection = document.querySelector(targetId);
+            if (targetId && targetId.startsWith("#")) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
 
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 70, // Adjust for navbar height
-                    behavior: "smooth",
-                });
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70, // Adjust for navbar height
+                        behavior: "smooth",
+                    });
+                }
             }
         });
     });
@@ -84,28 +86,58 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 6. Certificate Modal Logic (Enhanced with Zoom transition & loader support)
+    // 6. Certificate Modal Logic (Enhanced with Zoom transition, secure validation & loader support)
     const modal = document.getElementById("cert-modal");
     const modalFrame = document.getElementById("pdf-viewer");
     const closeModal = document.querySelector(".close-modal");
     const modalLoader = document.getElementById("modal-loader");
 
+    function closeCertModal() {
+        if (!modal) return;
+        modal.classList.remove("active");
+        setTimeout(() => {
+            if (!modal.classList.contains("active")) {
+                modal.style.display = "none";
+                if (modalFrame) {
+                    modalFrame.src = "about:blank"; // Clear iframe
+                    modalFrame.style.opacity = "0";
+                }
+            }
+        }, 300);
+        document.body.style.overflow = "auto"; // Re-enable scroll
+    }
+
     // Use event delegation for anything with data-pdf
     document.addEventListener("click", (e) => {
         const trigger = e.target.closest("[data-pdf]");
         if (trigger) {
-            const pdfPath = trigger.getAttribute("data-pdf");
-            if (pdfPath && pdfPath !== "#") {
-                // Security Validation: Ensure the path is safe to load (starts with 'assets/' or './assets/'),
-                // does not attempt directory traversal ('..'), and is not a dangerous protocol.
+            const rawPdfPath = trigger.getAttribute("data-pdf");
+            if (rawPdfPath && rawPdfPath !== "#") {
+                const cleanPath = rawPdfPath.split(/[?#]/)[0].trim();
+                let decodedPath = "";
+                try {
+                    decodedPath = decodeURIComponent(cleanPath);
+                } catch {
+                    console.error("Blocked malformed URL path:", rawPdfPath);
+                    return;
+                }
+
+                // Security Validation: Ensure the path is safe to load:
+                // - Starts with 'assets/' or './assets/'
+                // - Contains no directory traversal ('..') in raw or decoded form
+                // - Strictly ends with '.pdf' (blocks SVG, HTML, scripts)
+                // - Contains no dangerous protocols or non-whitelisted characters
                 const isSafePath =
-                    (pdfPath.startsWith("assets/") || pdfPath.startsWith("./assets/")) &&
-                    !pdfPath.includes("..") &&
-                    !pdfPath.toLowerCase().startsWith("javascript:") &&
-                    !pdfPath.toLowerCase().startsWith("data:");
+                    (cleanPath.startsWith("assets/") || cleanPath.startsWith("./assets/")) &&
+                    !cleanPath.includes("..") &&
+                    !decodedPath.includes("..") &&
+                    cleanPath.toLowerCase().endsWith(".pdf") &&
+                    !cleanPath.toLowerCase().startsWith("javascript:") &&
+                    !cleanPath.toLowerCase().startsWith("data:") &&
+                    /^[a-zA-Z0-9_./() -]+\.pdf$/i.test(cleanPath);
 
                 if (!isSafePath) {
-                    console.error("Blocked loading of potentially unsafe path:", pdfPath);
+                    console.error("Blocked loading of potentially unsafe path:", rawPdfPath);
                     return;
                 }
 
@@ -116,14 +148,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         navigator.userAgent,
                     ) || window.innerWidth < 768;
                 if (isMobile) {
-                    window.open(pdfPath, "_blank", "noopener,noreferrer");
+                    const newWin = window.open(cleanPath, "_blank", "noopener,noreferrer");
+                    if (newWin) newWin.opener = null;
                     return;
                 }
 
                 // Show loader, hide iframe initially for transition
                 if (modalLoader) modalLoader.style.display = "flex";
-                modalFrame.style.opacity = "0";
-                modalFrame.src = pdfPath;
+                if (modalFrame) {
+                    modalFrame.style.opacity = "0";
+                    modalFrame.src = cleanPath;
+                }
 
                 modal.style.display = "flex";
                 setTimeout(() => {
@@ -139,15 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
             e.target === closeModal ||
             e.target.closest(".close-modal")
         ) {
-            modal.classList.remove("active");
-            setTimeout(() => {
-                if (!modal.classList.contains("active")) {
-                    modal.style.display = "none";
-                    modalFrame.src = ""; // Clear iframe
-                    modalFrame.style.opacity = "0";
-                }
-            }, 300);
-            document.body.style.overflow = "auto"; // Re-enable scroll
+            closeCertModal();
+        }
+    });
+
+    // Close modal on Escape key press
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal && modal.classList.contains("active")) {
+            closeCertModal();
         }
     });
 
@@ -277,9 +311,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 formStatus.style.display = "none";
             }
 
+            // Client-side rate limiting / cooldown check (60 seconds)
+            const COOLDOWN_SECONDS = 60;
+            const lastSubmitTime = sessionStorage.getItem("last_form_submission");
+            if (lastSubmitTime) {
+                const elapsedSeconds = Math.floor(
+                    (Date.now() - parseInt(lastSubmitTime, 10)) / 1000,
+                );
+                if (elapsedSeconds < COOLDOWN_SECONDS) {
+                    const remaining = COOLDOWN_SECONDS - elapsedSeconds;
+                    showStatus(
+                        `Please wait ${remaining} second${remaining > 1 ? "s" : ""} before sending another message.`,
+                        "error",
+                    );
+                    return;
+                }
+            }
+
             // Client-side validation
             if (!name || !email || !message) {
                 showStatus("Please fill in all fields.", "error");
+                return;
+            }
+
+            // Length limits (defensive boundary validation)
+            if (name.length > 100) {
+                showStatus("Name must not exceed 100 characters.", "error");
+                return;
+            }
+            if (email.length > 254) {
+                showStatus("Email must not exceed 254 characters.", "error");
+                return;
+            }
+            if (message.length > 5000) {
+                showStatus("Message must not exceed 5000 characters.", "error");
                 return;
             }
 
@@ -299,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Disable button and show spinner inside it
+            // Disable button and input fields during submission
             let originalBtnHTML = "";
             if (submitBtn) {
                 originalBtnHTML = submitBtn.innerHTML;
@@ -307,6 +372,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 submitBtn.innerHTML =
                     '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
             }
+            if (nameInput) nameInput.disabled = true;
+            if (emailInput) emailInput.disabled = true;
+            if (messageInput) messageInput.disabled = true;
             showStatus("Sending your message...", "loading");
 
             try {
@@ -340,6 +408,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const result = await response.json();
 
                 if (response.ok && result.success) {
+                    // Record submission timestamp for cooldown throttling
+                    sessionStorage.setItem("last_form_submission", Date.now().toString());
                     showStatus(
                         "Thank you! Your message has been sent successfully.",
                         "success",
@@ -357,11 +427,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     "error",
                 );
             } finally {
-                // Re-enable button
+                // Re-enable button and fields
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnHTML;
                 }
+                if (nameInput) nameInput.disabled = false;
+                if (emailInput) emailInput.disabled = false;
+                if (messageInput) messageInput.disabled = false;
             }
         });
 
